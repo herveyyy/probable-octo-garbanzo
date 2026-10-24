@@ -25,13 +25,26 @@ export function useResortProfile({ resort }: UseResortProfileProps) {
 
   const filteredCottages = resort.cottages.filter((cot) => {
     if (selectedCategory === "all") return true;
-    if (selectedCategory === "day") return cot.category.includes("Day") || cot.category.includes("Kubo") || cot.category.includes("Pavilion");
+    if (selectedCategory === "day")
+      return (
+        cot.category === "Day Cottage" ||
+        cot.category === "Gathering Kubo" ||
+        cot.category === "Group Pavilion"
+      );
+    if (selectedCategory === "hall") return cot.category === "Function Hall";
     if (selectedCategory === "room") return cot.category.includes("Room");
     return true;
   });
 
   const handleAddToCart = (cottage: CottageOption) => {
     const isRoom = cottage.category.includes("Room");
+    const isHall = cottage.category === "Function Hall";
+    const timeSlot = isRoom
+      ? "Overnight (2:00 PM – 11:00 AM Next Day)"
+      : isHall
+      ? "Full-Day Function (8:00 AM – 9:00 PM)"
+      : "Day Use (8:00 AM – 5:00 PM)";
+
     addToCart({
       resortId: resort.id,
       resortName: resort.name,
@@ -41,7 +54,7 @@ export function useResortProfile({ resort }: UseResortProfileProps) {
       rate: cottage.rate,
       priceNumber: cottage.priceNumber,
       bookingDate,
-      timeSlot: isRoom ? "Overnight (2:00 PM Check-in)" : "Day Use (8:00 AM – 5:00 PM)",
+      timeSlot,
       guestCount: parseInt(selectedGuests) || 4,
       quantity: 1,
     });

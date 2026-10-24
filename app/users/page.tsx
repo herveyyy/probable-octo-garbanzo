@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { getUsersAction } from "@/lib/domain/actions/users.actions";
 import { UsersTable } from "@/components/organisms/UsersTable/UsersTable";
@@ -6,7 +7,20 @@ type UsersPageProps = {
   searchParams: Promise<{ error?: string }>;
 };
 
-export default async function UsersPage({ searchParams }: UsersPageProps) {
+function UsersFallback() {
+  return (
+    <main className="max-w-4xl mx-auto py-12 px-6">
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="text-3xl font-bold">Users</h1>
+      </div>
+      <div className="water-drop-surface-deep rounded-2xl p-8 text-center">
+        <p className="text-sm font-semibold text-on-surface-muted">Loading users...</p>
+      </div>
+    </main>
+  );
+}
+
+async function UsersContent({ searchParams }: UsersPageProps) {
   const params = await searchParams;
   const result = await getUsersAction();
 
@@ -23,3 +37,12 @@ export default async function UsersPage({ searchParams }: UsersPageProps) {
     </main>
   );
 }
+
+export default function UsersPage({ searchParams }: UsersPageProps) {
+  return (
+    <Suspense fallback={<UsersFallback />}>
+      <UsersContent searchParams={searchParams} />
+    </Suspense>
+  );
+}
+

@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { TUKURAN_RESORTS, type ResortHighlight } from "@/lib/entities/resorts.type";
 
-export type FilterCategory = "all" | "day" | "overnight" | "budget";
+export type FilterCategory = "all" | "day" | "functionhall" | "overnight" | "budget";
 
 export function useBrowseExperience() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -28,6 +28,12 @@ export function useBrowseExperience() {
       // Category matching
       if (filterCategory === "day") {
         return r.cottages.some((c) => c.category === "Day Cottage");
+      }
+      if (filterCategory === "functionhall") {
+        return (
+          r.hasFunctionHall ||
+          r.cottages.some((c) => c.category === "Function Hall")
+        );
       }
       if (filterCategory === "overnight") {
         return r.hasOvernightRooms;

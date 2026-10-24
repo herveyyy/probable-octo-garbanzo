@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { LuMapPin, LuPhone, LuWaves, LuArrowUpRight } from "react-icons/lu";
 import type { ResortHighlight } from "@/lib/entities/resorts.type";
 import { useResortHighlightCard } from "./resortHighlightCard.hooks";
@@ -29,27 +30,32 @@ export function ResortHighlightCard({
       <div>
         {/* Editorial Resort Photo */}
         <div className="relative aspect-16/10 w-full overflow-hidden bg-surface-container-high">
-          <img
+          <Image
             src={resort.image}
             alt={resort.name}
+            fill
+            sizes="(max-width: 1024px) 100vw, 33vw"
             className="size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-black/25" />
 
           {/* Top Badges */}
-          <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+          <div className="absolute top-4 left-4 right-4 flex items-center justify-between gap-2 flex-wrap">
             <span className="water-drop-pill rounded-full px-3 py-1 font-mono text-[11px] font-bold text-on-surface shadow-xs">
-              {resort.number} · {resort.badge}
+              {resort.number} · {resort.name}
             </span>
-            {resort.hasOvernightRooms ? (
-              <span className="water-drop-pill rounded-full px-2.5 py-0.5 text-[10px] font-bold text-emerald-800">
-                Rooms Available
-              </span>
-            ) : (
-              <span className="water-drop-pill rounded-full px-2.5 py-0.5 text-[10px] font-bold text-on-surface">
-                Day-Use Cottages
-              </span>
-            )}
+            <div className="flex items-center gap-1.5 flex-wrap">
+              {resort.hasFunctionHall && (
+                <span className="water-drop-pill rounded-full px-2.5 py-0.5 text-[9px] font-bold text-amber-900 bg-amber-50 border border-amber-200">
+                  Function Hall
+                </span>
+              )}
+              {resort.hasOvernightRooms && (
+                <span className="water-drop-pill rounded-full px-2.5 py-0.5 text-[9px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200">
+                  Rooms Available
+                </span>
+              )}
+            </div>
           </div>
 
           {/* Bottom Banner */}

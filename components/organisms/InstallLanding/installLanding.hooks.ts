@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { ResortHighlight } from "@/lib/entities/resorts.type";
 import { TUKURAN_RESORTS } from "@/lib/entities/resorts.type";
 
-export type GuestFilter = "all" | "day" | "overnight";
+export type GuestFilter = "all" | "day" | "functionhall" | "overnight";
 
 export function useInstallLanding() {
   const [activeResort, setActiveResort] = useState<ResortHighlight>(

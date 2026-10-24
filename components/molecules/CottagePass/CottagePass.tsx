@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   LuTent,
   LuPhone,
@@ -26,9 +27,11 @@ export function CottagePass({ resort }: CottagePassProps) {
       {/* Left: Active Resort Photographic Showcase */}
       <div className="water-drop-surface lg:col-span-7 flex flex-col justify-between overflow-hidden rounded-3xl">
         <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-3xl group">
-          <img
+          <Image
             src={resort.image}
             alt={resort.name}
+            fill
+            sizes="(max-width: 1024px) 100vw, 60vw"
             className="size-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-black/25" />
@@ -120,7 +123,7 @@ export function CottagePass({ resort }: CottagePassProps) {
                   TUKURAN COTTAGE PASS
                 </p>
                 <p className="font-mono text-xs font-extrabold text-on-surface">
-                  {resort.name.toUpperCase()} // RES-0{resort.number}
+                  {resort.name.toUpperCase()} · RES-0{resort.number}
                 </p>
               </div>
             </div>
@@ -132,7 +135,7 @@ export function CottagePass({ resort }: CottagePassProps) {
           {/* Cottage Option Selector */}
           <div className="my-5 space-y-2">
             <p className="text-[11px] font-bold uppercase tracking-wider text-on-surface-muted">
-              Select Cottage or Room Type
+              Select Cottage, Function Hall, or Room
             </p>
             <div className="flex flex-col gap-2">
               {resort.cottages.map((cot, idx) => {
@@ -247,10 +250,10 @@ export function CottagePass({ resort }: CottagePassProps) {
           </div>
 
           <a
-            href="#booking"
+            href={`/resorts/${resort.id}#available-units`}
             className="water-drop-button-primary block w-full py-3.5 text-center text-xs font-bold transition-all duration-200 ease-in-out hover:scale-[1.01] active:scale-[0.99]"
           >
-            Book This Cottage at {resort.name}
+            Book &amp; Pay Online at {resort.name}
           </a>
         </div>
       </div>

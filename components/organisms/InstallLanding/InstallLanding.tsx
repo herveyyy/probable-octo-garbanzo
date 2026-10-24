@@ -44,14 +44,14 @@ export function InstallLanding({
 
             <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-[-0.04em] text-on-surface leading-[1.04]">
               Beach resorts, open-air cottages, <br />
-              &amp; seaside overnight rooms.
+              function halls &amp; overnight rooms.
             </h1>
 
             <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-on-surface-variant font-normal">
-              Book local beachfront kubos, shaded day-trip cottages, and overnight coastal rooms
-              in Tukuran, Zamboanga del Sur. Explore the calm waters at <strong>Lantau Beach</strong>,
+              Book local beachfront kubos, shaded day-trip cottages, grand banquet function halls,
+              and overnight coastal rooms in Tukuran, Zamboanga del Sur. Explore the calm waters at <strong>Lantau Beach</strong>,
               group family shorelines at <strong>Donel&apos;s Beach Resort</strong>, and waterfront retreats
-              at <strong>Sirena Beach Resort</strong> in Dalahikan.
+              at <strong>Sirena Beach Resort</strong> in Dalahikan. Secure instant passes with online payment via GCash, Maya, or Card.
             </p>
 
             {/* Quick Filter Capsules */}
@@ -74,6 +74,14 @@ export function InstallLanding({
                   }`}
               >
                 Day-Trip Open-Air Cottages
+              </button>
+              <button
+                type="button"
+                onClick={() => setGuestFilter("functionhall")}
+                className={`water-drop-pill rounded-full px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 ${guestFilter === "functionhall" ? "bg-primary text-on-primary" : "text-on-surface hover:bg-white"
+                  }`}
+              >
+                Event Function Halls
               </button>
               <button
                 type="button"
@@ -165,6 +173,7 @@ export function InstallLanding({
                 guestFilter === "all" ||
                 (guestFilter === "day" &&
                   resort.cottages.some((c) => c.category === "Day Cottage")) ||
+                (guestFilter === "functionhall" && resort.hasFunctionHall) ||
                 (guestFilter === "overnight" && resort.hasOvernightRooms);
 
               return (

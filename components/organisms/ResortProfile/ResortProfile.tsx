@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   LuArrowLeft,
   LuMapPin,
@@ -105,19 +106,27 @@ export function ResortProfile({
             {/* Left: Interactive Photographic Gallery */}
             <div className="lg:col-span-7 space-y-3">
               <div className="relative aspect-16/10 w-full overflow-hidden rounded-2xl shadow-md">
-                <img
+                <Image
                   src={images[selectedGalleryIdx]}
                   alt={resort.name}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 60vw"
                   className="size-full object-cover transition-all duration-500 ease-out"
                 />
                 <div className="absolute inset-0 bg-black/15" />
 
-                <div className="absolute top-4 left-4 flex items-center gap-2">
+                <div className="absolute top-4 left-4 flex items-center gap-2 flex-wrap">
                   <span className="water-drop-pill rounded-full px-3 py-1 font-mono text-[10px] font-bold text-on-surface shadow-xs">
                     {resort.number} · {resort.badge}
                   </span>
+                  {resort.hasFunctionHall && (
+                    <span className="water-drop-pill rounded-full px-2.5 py-1 text-[10px] font-bold text-amber-900 bg-amber-50">
+                      Function Hall
+                    </span>
+                  )}
                   {resort.hasOvernightRooms && (
-                    <span className="water-drop-pill rounded-full px-2.5 py-1 text-[10px] font-bold text-emerald-800">
+                    <span className="water-drop-pill rounded-full px-2.5 py-1 text-[10px] font-bold text-emerald-800 bg-emerald-50">
                       Overnight Rooms
                     </span>
                   )}
@@ -146,9 +155,11 @@ export function ResortProfile({
                           : "border-transparent opacity-70 hover:opacity-100"
                         }`}
                     >
-                      <img
+                      <Image
                         src={img}
                         alt={`Photo ${idx + 1}`}
+                        fill
+                        sizes="96px"
                         className="size-full object-cover"
                       />
                     </button>
@@ -241,15 +252,15 @@ export function ResortProfile({
                 <span>BOOKING &amp; RESERVATION CATALOG</span>
               </div>
               <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-on-surface mt-2">
-                Available Cottages &amp; Rooms
+                Available Cottages, Function Halls &amp; Rooms
               </h2>
               <p className="text-xs sm:text-sm text-on-surface-variant max-w-xl font-normal">
-                Choose your desired beachfront kubo or overnight room. Tap &quot;Add to Booking Bag&quot; to customize and confirm your pass instantly.
+                Choose your desired beachfront kubo, grand function hall, or overnight room. Tap &quot;Add to Booking Bag&quot; to pay online and reserve instantly.
               </p>
             </div>
 
             {/* Category Filter Tabs */}
-            <div className="water-drop-pill rounded-full flex items-center p-1.5 self-start md:self-auto">
+            <div className="water-drop-pill rounded-full flex items-center p-1.5 self-start md:self-auto flex-wrap gap-1">
               <button
                 type="button"
                 onClick={() => setSelectedCategory("all")}
@@ -270,6 +281,18 @@ export function ResortProfile({
               >
                 Day Cottages
               </button>
+              {resort.hasFunctionHall && (
+                <button
+                  type="button"
+                  onClick={() => setSelectedCategory("hall")}
+                  className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer ${selectedCategory === "hall"
+                      ? "bg-primary text-on-primary"
+                      : "text-on-surface-variant hover:text-on-surface"
+                    }`}
+                >
+                  Function Halls
+                </button>
+              )}
               {resort.hasOvernightRooms && (
                 <button
                   type="button"
@@ -340,67 +363,85 @@ export function ResortProfile({
 
           {/* Cottages & Rooms Cards Grid */}
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-stretch">
-            {filteredCottages.map((cot) => (
-              <div
-                key={cot.id}
-                className="water-drop-surface group rounded-3xl overflow-hidden flex flex-col justify-between p-5 transition-all duration-300 hover:shadow-xl"
-              >
-                <div>
-                  {/* Photo & Badge */}
-                  <div className="relative aspect-16/10 w-full overflow-hidden rounded-2xl">
-                    <img
-                      src={cot.image || resort.image}
-                      alt={cot.name}
-                      className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute top-3 left-3">
-                      <span className="water-drop-pill rounded-full px-2.5 py-0.5 text-[10px] font-bold text-on-surface shadow-xs">
-                        {cot.category}
-                      </span>
+            {filteredCottages.map((cot) => {
+              const isHall = cot.category === "Function Hall";
+              const isRoom = cot.category.includes("Room");
+
+              return (
+                <div
+                  key={cot.id}
+                  className="water-drop-surface group rounded-3xl overflow-hidden flex flex-col justify-between p-5 transition-all duration-300 hover:shadow-xl"
+                >
+                  <div>
+                    {/* Photo & Badge */}
+                    <div className="relative aspect-16/10 w-full overflow-hidden rounded-2xl">
+                      <Image
+                        src={cot.image || resort.image}
+                        alt={cot.name}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute top-3 left-3 flex items-center gap-1.5 flex-wrap">
+                        <span
+                          className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold shadow-xs ${
+                            isHall
+                              ? "bg-amber-100 text-amber-900 border border-amber-300"
+                              : isRoom
+                              ? "bg-blue-100 text-blue-900 border border-blue-300"
+                              : "bg-emerald-100 text-emerald-900 border border-emerald-300"
+                          }`}
+                        >
+                          {cot.category}
+                        </span>
+                        <span className="water-drop-pill rounded-full px-2 py-0.5 text-[9px] font-bold text-sky-800 bg-sky-50">
+                          Pay Online
+                        </span>
+                      </div>
+
+                      <div className="absolute bottom-3 right-3">
+                        <span className="water-drop-pill rounded-full px-2.5 py-0.5 text-[10px] font-bold text-emerald-800 shadow-xs">
+                          {cot.availableCount} Available Today
+                        </span>
+                      </div>
                     </div>
 
-                    <div className="absolute bottom-3 right-3">
-                      <span className="water-drop-pill rounded-full px-2.5 py-0.5 text-[10px] font-bold text-emerald-800 shadow-xs">
-                        {cot.availableCount} Available Today
-                      </span>
+                    {/* Title & Pricing */}
+                    <div className="mt-4 space-y-2">
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="font-display text-lg font-extrabold text-on-surface">
+                          {cot.name}
+                        </h3>
+                        <span className="font-display text-base font-black text-primary shrink-0">
+                          {cot.rate}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-1.5 text-xs font-semibold text-on-surface-muted">
+                        <LuUsers className="size-3.5 text-outline" />
+                        <span>{cot.capacity}</span>
+                      </div>
+
+                      <p className="text-xs text-on-surface-variant leading-relaxed">
+                        {cot.features}
+                      </p>
                     </div>
                   </div>
 
-                  {/* Title & Pricing */}
-                  <div className="mt-4 space-y-2">
-                    <div className="flex items-start justify-between gap-2">
-                      <h3 className="font-display text-lg font-extrabold text-on-surface">
-                        {cot.name}
-                      </h3>
-                      <span className="font-display text-base font-black text-primary shrink-0">
-                        {cot.rate}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-1.5 text-xs font-semibold text-on-surface-muted">
-                      <LuUsers className="size-3.5 text-outline" />
-                      <span>{cot.capacity}</span>
-                    </div>
-
-                    <p className="text-xs text-on-surface-variant leading-relaxed">
-                      {cot.features}
-                    </p>
+                  {/* Card Action Button */}
+                  <div className="mt-5 border-t border-outline-variant/20 pt-4">
+                    <button
+                      type="button"
+                      onClick={() => handleAddToCart(cot)}
+                      className="water-drop-button-primary w-full py-3 text-xs font-bold flex items-center justify-center gap-2 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                    >
+                      <LuShoppingBag className="size-3.5" />
+                      <span>Add to Bag (Pay Online)</span>
+                    </button>
                   </div>
                 </div>
-
-                {/* Card Action Button */}
-                <div className="mt-5 border-t border-outline-variant/20 pt-4">
-                  <button
-                    type="button"
-                    onClick={() => handleAddToCart(cot)}
-                    className="water-drop-button-primary w-full py-3 text-xs font-bold flex items-center justify-center gap-2 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
-                  >
-                    <LuShoppingBag className="size-3.5" />
-                    <span>Add to Booking Bag</span>
-                  </button>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 

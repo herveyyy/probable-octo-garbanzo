@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, useMemo, useCallback } from "react";
-import type { CartItem, BookingOrder } from "@/lib/entities/resorts.type";
+import type { CartItem, BookingOrder, PaymentMethod, PaymentPlan } from "@/lib/entities/resorts.type";
 import { DEFAULT_GUEST_NAME } from "@/lib/entities/resorts.type";
 
 interface CartContextValue {
@@ -20,10 +20,13 @@ interface CartContextValue {
   openCart: () => void;
   closeCart: () => void;
   toggleCart: () => void;
-  completeBooking: (guest: {
+  completeBooking: (bookingData: {
     guestName: string;
     contactPhone?: string;
     notes?: string;
+    paymentMethod?: PaymentMethod;
+    paymentPlan?: PaymentPlan;
+    accountReference?: string;
   }) => BookingOrder;
   dismissOrder: () => void;
 }
@@ -150,21 +153,45 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   );
 
   const completeBooking = useCallback(
-    (guest: { guestName: string; contactPhone?: string; notes?: string }) => {
+    (bookingData: {
+      guestName: string;
+      contactPhone?: string;
+      notes?: string;
+      paymentMethod?: PaymentMethod;
+      paymentPlan?: PaymentPlan;
+      accountReference?: string;
+    }) => {
       const orderId = `TKR-${Date.now().toString(36).toUpperCase()}-${Math.floor(
         1000 + Math.random() * 9000
       )}`;
-      const resolvedGuestName = guest.guestName.trim() || guestName || DEFAULT_GUEST_NAME;
+      const resolvedGuestName =
+        bookingData.guestName.trim() || guestName || DEFAULT_GUEST_NAME;
+
+      const method = bookingData.paymentMethod || "gcash";
+      const plan = bookingData.paymentPlan || "full";
+      const amountPaid =
+        plan === "deposit" ? Math.round(totalAmount * 0.5) : totalAmount;
+      const balanceDue = totalAmount - amountPaid;
+      const transactionRef = `TXN-${method.toUpperCase()}-${Math.floor(
+        100000 + Math.random() * 900000
+      )}`;
+
       const newOrder: BookingOrder = {
         orderId,
         items: [...items],
         totalAmount,
         guestName: resolvedGuestName,
-        contactPhone: guest.contactPhone?.trim() || "Walk-in / Demo Guest",
-        notes: guest.notes,
+        contactPhone: bookingData.contactPhone?.trim() || "Walk-in / Demo Guest",
+        notes: bookingData.notes,
         bookingDate: items[0]?.bookingDate || new Date().toISOString().split("T")[0],
         createdAt: new Date().toISOString(),
         status: "confirmed",
+        paymentMethod: method,
+        paymentPlan: plan,
+        amountPaid,
+        balanceDue,
+        transactionRef,
+        accountReference: bookingData.accountReference,
       };
 
       setCompletedOrder(newOrder);

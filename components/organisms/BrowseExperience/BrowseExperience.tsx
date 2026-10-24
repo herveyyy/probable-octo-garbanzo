@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   LuSearch,
   LuMapPin,
@@ -204,6 +205,16 @@ export function BrowseExperience({
               </button>
               <button
                 type="button"
+                onClick={() => setFilterCategory("functionhall")}
+                className={`water-drop-pill rounded-full px-3.5 py-2 text-xs font-bold cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 ${filterCategory === "functionhall"
+                  ? "bg-primary text-on-primary"
+                  : "text-on-surface hover:bg-white"
+                  }`}
+              >
+                Function Halls
+              </button>
+              <button
+                type="button"
                 onClick={() => setFilterCategory("overnight")}
                 className={`water-drop-pill rounded-full px-3.5 py-2 text-xs font-bold cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 ${filterCategory === "overnight"
                   ? "bg-primary text-on-primary"
@@ -280,26 +291,34 @@ export function BrowseExperience({
                   >
                     {/* Top Picture & Badges */}
                     <div className="relative aspect-video w-full overflow-hidden rounded-2xl">
-                      <img
+                      <Image
                         src={resort.image}
                         alt={resort.name}
-                        className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-black/20" />
 
-                      <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+                      <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 flex-wrap">
                         <span className="water-drop-pill rounded-full px-3 py-1 font-mono text-[10px] font-bold text-on-surface shadow-xs">
-                          {resort.number} · {resort.badge}
+                          {resort.number} · {resort.name}
                         </span>
-                        {resort.hasOvernightRooms ? (
-                          <span className="water-drop-pill rounded-full px-2.5 py-0.5 text-[10px] font-bold text-emerald-800">
-                            Rooms Available
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          {resort.hasFunctionHall && (
+                            <span className="water-drop-pill rounded-full px-2.5 py-0.5 text-[9px] font-bold bg-amber-50 text-amber-900 border border-amber-200">
+                              Function Hall
+                            </span>
+                          )}
+                          {resort.hasOvernightRooms && (
+                            <span className="water-drop-pill rounded-full px-2.5 py-0.5 text-[9px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200">
+                              Overnight Rooms
+                            </span>
+                          )}
+                          <span className="water-drop-pill rounded-full px-2 py-0.5 text-[9px] font-bold text-sky-800 bg-sky-50 border border-sky-200">
+                            Pay Online
                           </span>
-                        ) : (
-                          <span className="water-drop-pill rounded-full px-2.5 py-0.5 text-[10px] font-bold text-on-surface">
-                            Day-Use Only
-                          </span>
-                        )}
+                        </div>
                       </div>
 
                       <div className="absolute bottom-3 left-3 right-3 text-white">

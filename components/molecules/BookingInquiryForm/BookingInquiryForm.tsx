@@ -33,12 +33,12 @@ export function BookingInquiryForm({
 
 
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-on-surface">
-            Reserve your beach cottage.
+            Reserve cottages, function halls &amp; rooms.
           </h2>
 
           <p className="text-sm sm:text-base leading-relaxed text-on-surface-variant font-normal">
-            Planning a family gathering, weekend picnic, or day trip? Inquire directly
-            for open-air cottage rentals and overnight coastal rooms.
+            Planning a wedding reception, corporate seminar, family gathering, weekend picnic, or overnight beach stay? Inquire directly
+            or reserve online with instant confirmation.
           </p>
 
           {/* Feedback message banner */}
@@ -117,10 +117,10 @@ export function BookingInquiryForm({
                   onChange={(e) => setGuestCount(e.target.value)}
                   className="water-drop-pill rounded-full w-full px-4 py-3 text-xs font-semibold text-on-surface outline-hidden cursor-pointer"
                 >
-                  <option value="1-4 Guests">1–4 Guests</option>
+                  <option value="1-4 Guests">1–4 Guests (Room / Small Cottage)</option>
                   <option value="4-8 Guests (Day Kubo)">4–8 Guests (Day Kubo)</option>
-                  <option value="8-15 Guests (Family)">8–15 Guests (Family)</option>
-                  <option value="15+ Guests (Pavilion)">15+ Guests (Pavilion)</option>
+                  <option value="8-15 Guests (Family)">8–15 Guests (Family Pavilion)</option>
+                  <option value="60-120 Guests (Function Hall)">60–120 Guests (Grand Function Hall)</option>
                 </select>
               </div>
             </div>
