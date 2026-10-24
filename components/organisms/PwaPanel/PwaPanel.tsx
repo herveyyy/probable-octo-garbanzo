@@ -27,7 +27,7 @@ export function PwaPanelView({
 }: PwaPanelViewProps) {
   const rootClass = embedded
     ? "w-full text-left"
-    : "mt-12 w-full max-w-lg rounded-2xl bg-surface-container-low p-6 text-left";
+    : "mt-12 w-full max-w-lg rounded-3xl bg-surface-container-low p-6 text-left";
 
   return (
     <section className={rootClass}>

@@ -9,17 +9,17 @@ type DesktopWindowFrameProps = {
 export function DesktopWindowFrame({ title, children, className = "" }: DesktopWindowFrameProps) {
   return (
     <div
-      className={`overflow-hidden rounded-xl bg-surface-container-lowest shadow-bloom ring-1 ring-primary/10 ${className}`}
+      className={`water-drop-glass-deep overflow-hidden rounded-4xl ${className}`}
     >
-      <div className="flex items-center gap-2 bg-surface-container-low px-5 py-3.5">
-        <span className="size-3 rounded-full bg-secondary/70" aria-hidden />
-        <span className="size-3 rounded-full bg-secondary-container" aria-hidden />
-        <span className="size-3 rounded-full bg-primary/25" aria-hidden />
-        <span className="ml-3 flex-1 truncate text-center font-mono text-xs text-on-surface-muted">
+      <div className="flex items-center gap-2 border-b border-white/80 bg-white/50 px-6 py-4">
+        <span className="size-2.5 rounded-full bg-on-surface/20" aria-hidden />
+        <span className="size-2.5 rounded-full bg-on-surface/20" aria-hidden />
+        <span className="size-2.5 rounded-full bg-on-surface/20" aria-hidden />
+        <span className="ml-3 flex-1 truncate text-center font-mono text-xs font-semibold text-on-surface-variant">
           {title}
         </span>
       </div>
-      <div className="futuristic-card-grid min-h-[280px] p-8 lg:min-h-[320px] lg:p-10">{children}</div>
+      <div className="min-h-70 p-8 lg:min-h-80 lg:p-10">{children}</div>
     </div>
   );
 }

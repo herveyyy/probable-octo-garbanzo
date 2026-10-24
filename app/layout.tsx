@@ -12,18 +12,23 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+const projectName =
+  process.env.PROJECT_NAME || process.env.NEXT_PUBLIC_PROJECT_NAME || "PROJECT ONE";
+
 export const metadata: Metadata = {
-  title: "RND Next.js Template",
-  description: "Livro Systems RND Next.js template with Atomic Design, Drizzle ORM, and Better Auth",
+  title: `${projectName} | Beach Resorts & Cottage Bookings`,
+  description: `Book seaside cottages, overnight rooms, and open air kubos at Lantau Beach, Donel's Beach Resort, and Sirena Beach Resort in Tukuran, Zamboanga del Sur.`,
   appleWebApp: {
     capable: true,
-    title: "RND",
+    title: projectName,
   },
   icons: {
     icon: "/icon.svg",
     apple: "/icon.svg",
   },
 };
+
+import { CartProvider } from "@/lib/context/cart.context";
 
 export default function RootLayout({
   children,
@@ -32,7 +37,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${manrope.variable} ${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-(family-name:--font-inter)">{children}</body>
+      <body className="min-h-full flex flex-col font-(family-name:--font-inter)">
+        <CartProvider>{children}</CartProvider>
+      </body>
     </html>
   );
 }

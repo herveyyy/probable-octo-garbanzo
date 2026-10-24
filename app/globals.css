@@ -1,61 +1,111 @@
 @import "tailwindcss";
 
 :root {
-  /* Layer 0 — canvas */
-  --surface: #f6fafa;
-  --on-surface: #181c1d;
-
-  /* Surface hierarchy */
-  --surface-container-low: #f0f4f4;
+  /* Lumio Design System — Clean Warm Ivory Canvas */
+  --surface: #fdf8f8;
+  --surface-dim: #ddd9d9;
+  --surface-bright: #fdf8f8;
   --surface-container-lowest: #ffffff;
-  --surface-container-high: #e8ecec;
-  --surface-container-highest: #dee4e4;
-  --surface-bright: #f6fafa;
-  --surface-variant: #dce4e4;
+  --surface-container-low: #f7f3f2;
+  --surface-container: #f1edec;
+  --surface-container-high: #ebe7e7;
+  --surface-container-highest: #e5e2e1;
+  --surface-variant: #e5e2e1;
+  --surface-tint: #5f5e60;
 
-  /* Brand */
-  --primary: #0a5c66;
-  --primary-container: #0d8494;
+  /* Typography & Contrasts (Solid, Zero Gradients) */
+  --on-surface: #1c1b1b;
+  --on-surface-variant: #46464a;
+  --on-surface-muted: #5e5f5c;
+  --inverse-surface: #313030;
+  --inverse-on-surface: #f4f0ef;
+  --outline: #77767b;
+  --outline-variant: #c7c6ca;
+
+  /* Primary Brand (Charcoal / Noir Core) */
+  --primary: #030304;
   --on-primary: #ffffff;
-  --secondary: #c76a1a;
-  --secondary-container: #f4dcc8;
+  --primary-container: #1d1d1f;
+  --on-primary-container: #868587;
+  --inverse-primary: #c8c6c8;
+  --primary-fixed: #e4e2e4;
+  --primary-fixed-dim: #c8c6c8;
+  --on-primary-fixed: #1b1b1d;
+  --on-primary-fixed-variant: #474649;
+
+  /* Secondary Neutral */
+  --secondary: #5e5f5c;
   --on-secondary: #ffffff;
-  --tertiary: #004f4f;
+  --secondary-container: #e0e0dc;
+  --on-secondary-container: #626360;
+  --secondary-fixed: #e3e2df;
+  --secondary-fixed-dim: #c7c7c3;
+  --on-secondary-fixed: #1b1c1a;
+  --on-secondary-fixed-variant: #464744;
 
-  /* Utility */
-  --outline-variant: #bfc8cd;
-  --on-surface-muted: #5c6568;
+  /* Tertiary */
+  --tertiary: #00030f;
+  --on-tertiary: #ffffff;
+  --tertiary-container: #001c44;
+  --on-tertiary-container: #2a81ff;
 
-  --shadow-bloom: 0 12px 32px rgb(24 28 29 / 4%);
+  /* Status / Alerts */
+  --error: #ba1a1a;
+  --on-error: #ffffff;
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
 }
 
 @theme inline {
   --color-surface: var(--surface);
-  --color-on-surface: var(--on-surface);
-  --color-on-surface-muted: var(--on-surface-muted);
-  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-dim: var(--surface-dim);
+  --color-surface-bright: var(--surface-bright);
   --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
   --color-surface-container-high: var(--surface-container-high);
   --color-surface-container-highest: var(--surface-container-highest);
-  --color-surface-bright: var(--surface-bright);
   --color-surface-variant: var(--surface-variant);
-  --color-primary: var(--primary);
-  --color-primary-container: var(--primary-container);
-  --color-on-primary: var(--on-primary);
-  --color-secondary: var(--secondary);
-  --color-secondary-container: var(--secondary-container);
-  --color-on-secondary: var(--on-secondary);
-  --color-tertiary: var(--tertiary);
+  --color-surface-tint: var(--surface-tint);
+
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-on-surface-muted: var(--on-surface-muted);
+  --color-inverse-surface: var(--inverse-surface);
+  --color-inverse-on-surface: var(--inverse-on-surface);
+  --color-outline: var(--outline);
   --color-outline-variant: var(--outline-variant);
-  --font-display: var(--font-manrope);
+
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-primary-container: var(--primary-container);
+  --color-on-primary-container: var(--on-primary-container);
+  --color-inverse-primary: var(--inverse-primary);
+
+  --color-secondary: var(--secondary);
+  --color-on-secondary: var(--on-secondary);
+  --color-secondary-container: var(--secondary-container);
+  --color-on-secondary-container: var(--on-secondary-container);
+
+  --color-tertiary: var(--tertiary);
+  --color-on-tertiary: var(--on-tertiary);
+  --color-tertiary-container: var(--tertiary-container);
+  --color-on-tertiary-container: var(--on-tertiary-container);
+
+  --color-error: var(--error);
+  --color-on-error: var(--on-error);
+  --color-error-container: var(--error-container);
+  --color-on-error-container: var(--on-error-container);
+
+  --font-display: var(--font-inter);
   --font-body: var(--font-inter);
-  --shadow-bloom: var(--shadow-bloom);
 }
 
 body {
   background: var(--surface);
   color: var(--on-surface);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 html {
@@ -63,90 +113,181 @@ html {
 }
 
 .font-display {
-  font-family: var(--font-manrope), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  letter-spacing: -0.035em;
 }
 
-.btn-primary-gradient {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+/* ========================================================
+   MODERN SOFT WATER DROP GLASS SHADER (FOR UI COMPONENTS)
+   Pure solid Lumio tokens. Zero color gradients.
+   Refraction and specular meniscus highlights on components.
+   ======================================================== */
+
+/* Surface: Soft glassmorphic cards with convex liquid refraction highlight */
+.water-drop-surface {
+  background: rgba(255, 255, 255, 0.74);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  box-shadow:
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1.5px 2px 0 rgba(255, 255, 255, 0.35),
+    0 16px 36px -8px rgba(28, 27, 27, 0.05),
+    0 2px 6px -1px rgba(28, 27, 27, 0.02);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.glass-panel {
-  background: color-mix(in srgb, var(--surface-variant) 70%, transparent);
+.water-drop-surface:hover {
+  background: rgba(255, 255, 255, 0.84);
+  border-color: rgba(255, 255, 255, 0.98);
+  box-shadow:
+    inset 0 2px 2.5px 0 rgba(255, 255, 255, 1),
+    inset 0 -1.5px 2px 0 rgba(255, 255, 255, 0.45),
+    0 22px 48px -10px rgba(28, 27, 27, 0.07),
+    0 4px 10px -2px rgba(28, 27, 27, 0.03);
+}
+
+/* Deep / Focus Surface (Modals, Boarding Pass, Active Cards) */
+.water-drop-surface-deep,
+.water-drop-glass-deep {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(32px) saturate(150%);
+  -webkit-backdrop-filter: blur(32px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow:
+    inset 0 2px 2.5px 0 rgba(255, 255, 255, 1),
+    inset 0 -1.5px 2px 0 rgba(255, 255, 255, 0.4),
+    0 24px 56px -10px rgba(28, 27, 27, 0.07),
+    0 4px 12px -2px rgba(28, 27, 27, 0.03);
+}
+
+/* Soft Water Drop Pill (Pill Buttons, Navbars, HUD Island) */
+.water-drop-pill {
+  background: rgba(255, 255, 255, 0.82);
+  border-radius: 9999px;
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  box-shadow:
+    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.98),
+    inset 0 -1px 1.5px 0 rgba(255, 255, 255, 0.35),
+    0 10px 24px -4px rgba(28, 27, 27, 0.05);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.water-drop-pill:hover {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow:
+    inset 0 2px 2px 0 rgba(255, 255, 255, 1),
+    0 14px 28px -4px rgba(28, 27, 27, 0.07);
+}
+
+/* Solid Lumio Primary Button (Convex Noir Water Droplet) */
+.water-drop-button-primary {
+  background: #030304;
+  color: #ffffff;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 1px 0 rgba(255, 255, 255, 0.1),
+    0 8px 22px -4px rgba(3, 3, 4, 0.28);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.water-drop-button-primary:hover {
+  background: #1d1d1f;
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 2px 2px 0 rgba(255, 255, 255, 0.45),
+    0 12px 28px -4px rgba(3, 3, 4, 0.36);
+}
+
+/* Solid Lumio Secondary Button (Crystal Water Droplet Lens) */
+.water-drop-button-secondary {
+  background: rgba(255, 255, 255, 0.82);
+  color: #1c1b1b;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.98),
+    inset 0 -1px 1px 0 rgba(255, 255, 255, 0.3),
+    0 8px 20px -4px rgba(28, 27, 27, 0.05);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
 }
 
-.ghost-border {
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--outline-variant) 15%, transparent);
+.water-drop-button-secondary:hover {
+  background: rgba(255, 255, 255, 0.96);
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 2px 2px 0 rgba(255, 255, 255, 1),
+    0 12px 26px -4px rgba(28, 27, 27, 0.08);
 }
 
-.input-glow:focus {
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 35%, transparent);
-}
-
-.futuristic-dots {
-  background-image: radial-gradient(
-    circle,
-    color-mix(in srgb, var(--primary) 28%, transparent) 1px,
-    transparent 1px
-  );
-  background-size: 32px 32px;
-  mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 15%, transparent 80%);
-  opacity: 0.45;
-}
-
-.futuristic-glow {
-  background:
-    radial-gradient(ellipse 50% 40% at 15% 20%, color-mix(in srgb, var(--primary-container) 18%, transparent), transparent 70%),
-    radial-gradient(ellipse 45% 35% at 85% 75%, color-mix(in srgb, var(--secondary) 12%, transparent), transparent 70%),
-    radial-gradient(ellipse 60% 50% at 50% 100%, color-mix(in srgb, var(--tertiary) 8%, transparent), transparent 65%);
-}
-
-.futuristic-pulse {
-  animation: futuristic-pulse 3s ease-in-out infinite;
-}
-
-@keyframes futuristic-pulse {
-  0%,
-  100% {
-    opacity: 0.45;
-  }
-  50% {
-    opacity: 0.9;
-  }
-}
-
-.futuristic-frame {
-  position: relative;
-}
-
-.futuristic-frame::before,
-.futuristic-frame::after {
+/* Boarding pass perforated tear notches */
+.ticket-notch-left::before {
   content: "";
   position: absolute;
-  width: 18px;
-  height: 18px;
-  pointer-events: none;
+  top: 50%;
+  left: -12px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fdf8f8;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: inset -2px 0 4px rgba(28, 27, 27, 0.04);
 }
 
-.futuristic-frame::before {
-  top: 12px;
-  left: 12px;
-  border-top: 2px solid color-mix(in srgb, var(--primary) 45%, transparent);
-  border-left: 2px solid color-mix(in srgb, var(--primary) 45%, transparent);
+.ticket-notch-right::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -12px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fdf8f8;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: inset 2px 0 4px rgba(28, 27, 27, 0.04);
 }
 
-.futuristic-frame::after {
-  right: 12px;
-  bottom: 12px;
-  border-right: 2px solid color-mix(in srgb, var(--primary-container) 45%, transparent);
-  border-bottom: 2px solid color-mix(in srgb, var(--primary-container) 45%, transparent);
+/* Smooth Interactive Transitions */
+.interactive-ease {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.futuristic-card-grid {
-  background-image:
-    linear-gradient(color-mix(in srgb, var(--primary) 6%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--primary) 6%, transparent) 1px, transparent 1px);
-  background-size: 20px 20px;
-  mask-image: linear-gradient(to bottom, black 60%, transparent);
+.interactive-hover {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.interactive-hover:hover {
+  transform: translateY(-2px);
+}
+
+.interactive-hover:active {
+  transform: translateY(0px) scale(0.98);
+}
+
+/* MapLibre Popup Overrides */
+.custom-map-popup .maplibregl-popup-content {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 1rem;
+}
+
+.custom-map-popup .maplibregl-popup-tip {
+  border-top-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.custom-map-popup .maplibregl-popup-close-button {
+  display: none !important;
 }
 

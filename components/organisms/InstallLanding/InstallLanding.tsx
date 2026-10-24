@@ -1,202 +1,239 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/atoms/Button/Button";
-import { useButtonStyles } from "@/components/atoms/Button/button.hooks";
-import { StatusOrb } from "@/components/atoms/StatusOrb/StatusOrb";
-import { DesktopWindowFrame } from "@/components/molecules/DesktopWindowFrame/DesktopWindowFrame";
-import { FuturisticBackdrop } from "@/components/molecules/FuturisticBackdrop/FuturisticBackdrop";
-import { PwaPanel } from "@/components/organisms/PwaPanel/PwaPanel";
-import { usePwaPanel } from "@/components/organisms/PwaPanel/pwaPanel.hooks";
-import { StoragePanel } from "@/components/organisms/StoragePanel/StoragePanel";
-import { useStoragePanel } from "@/components/organisms/StoragePanel/storagePanel.hooks";
+import { LuMapPin, LuPhoneCall, LuSparkles, LuMap } from "react-icons/lu";
+import { Footer } from "@/components/organisms/Footer/Footer";
+import { IslandNavbar } from "@/components/molecules/IslandNavbar/IslandNavbar";
+import { ResortHighlightCard } from "@/components/molecules/ResortHighlightCard/ResortHighlightCard";
+import { CottagePass } from "@/components/molecules/CottagePass/CottagePass";
+import { ResortMatrixTable } from "@/components/molecules/ResortMatrixTable/ResortMatrixTable";
+import { SoundscapeWidget } from "@/components/molecules/SoundscapeWidget/SoundscapeWidget";
+import { BookingInquiryForm } from "@/components/molecules/BookingInquiryForm/BookingInquiryForm";
+import { BookingCartDrawer } from "@/components/organisms/BookingCartDrawer/BookingCartDrawer";
+import { useInstallLanding } from "./installLanding.hooks";
 
-const INSTALL_STEPS = [
-  {
-    title: "Open in a desktop browser",
-    body: "Use Chrome or Edge on Windows, macOS, or Linux for the full install experience.",
-  },
-  {
-    title: "Click Install",
-    body: "Accept the browser install prompt, or use the install icon in the address bar (⊕ or monitor).",
-  },
-  {
-    title: "Launch from desktop",
-    body: "Open RND from Start, Applications, or your dock — focused window, no browser chrome.",
-  },
-] as const;
+interface InstallLandingProps {
+  projectName?: string;
+}
 
-export function InstallLanding() {
-  const pwa = usePwaPanel();
-  const storage = useStoragePanel();
-  const { isStandalone, isIOS, canInstall, installOutcome, installApp } = pwa;
-  const secondaryLinkClass = useButtonStyles("secondary");
-
-  const statusVariant = isStandalone ? "complete" : canInstall ? "progress" : "neutral";
-  const statusLabel = isStandalone
-    ? "Installed"
-    : canInstall
-      ? "Ready to install"
-      : isIOS
-        ? "Add via Share menu"
-        : "Install available";
+export function InstallLanding({
+  projectName = process.env.NEXT_PUBLIC_PROJECT_NAME || "PROJECT ONE",
+}: InstallLandingProps) {
+  const {
+    resorts,
+    activeResort,
+    guestFilter,
+    setGuestFilter,
+    handleSelectResort,
+  } = useInstallLanding();
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-surface">
-      <FuturisticBackdrop />
+    <div className="relative min-h-screen overflow-x-hidden bg-surface text-on-surface antialiased flex flex-col justify-between">
+      {/* 1. Responsive Island Navigation Molecule */}
+      <IslandNavbar
+        projectName={projectName}
+        activeResort={activeResort}
+        onSelectResort={handleSelectResort}
+      />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1360px] px-8 py-10 lg:px-16 lg:py-14 xl:py-16">
-        <header className="mb-12 flex items-center justify-between gap-6 border-b border-primary/10 pb-6 lg:mb-16">
-          <div className="flex items-center gap-8">
-            <Link
-              href="/"
-              className="text-sm font-medium text-on-surface-muted transition-colors hover:text-primary"
-            >
-              ← Home
-            </Link>
-            <span className="hidden text-sm text-on-surface-muted lg:inline">Install workspace</span>
+      {/* 2. Hero Section */}
+      <main className="relative z-10 mx-auto w-full max-w-340 px-6 pt-24 pb-16 lg:px-12 lg:pt-36">
+        <div className="grid items-end gap-8 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-8 space-y-6">
+
+
+            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-[-0.04em] text-on-surface leading-[1.04]">
+              Beach resorts, open-air cottages, <br />
+              &amp; seaside overnight rooms.
+            </h1>
+
+            <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-on-surface-variant font-normal">
+              Book local beachfront kubos, shaded day-trip cottages, and overnight coastal rooms
+              in Tukuran, Zamboanga del Sur. Explore the calm waters at <strong>Lantau Beach</strong>,
+              group family shorelines at <strong>Donel&apos;s Beach Resort</strong>, and waterfront retreats
+              at <strong>Sirena Beach Resort</strong> in Dalahikan.
+            </p>
+
+            {/* Quick Filter Capsules */}
+            <div className="flex flex-wrap items-center gap-2 pt-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-on-surface-muted mr-1">
+                Filter:
+              </span>
+              <button
+                type="button"
+                onClick={() => setGuestFilter("all")}
+                className={`water-drop-pill rounded-full px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 ${guestFilter === "all" ? "bg-primary text-on-primary" : "text-on-surface hover:bg-white"
+                  }`}
+              >
+                All 3 Resorts
+              </button>
+              <button
+                type="button"
+                onClick={() => setGuestFilter("day")}
+                className={`water-drop-pill rounded-full px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 ${guestFilter === "day" ? "bg-primary text-on-primary" : "text-on-surface hover:bg-white"
+                  }`}
+              >
+                Day-Trip Open-Air Cottages
+              </button>
+              <button
+                type="button"
+                onClick={() => setGuestFilter("overnight")}
+                className={`water-drop-pill rounded-full px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 ${guestFilter === "overnight" ? "bg-primary text-on-primary" : "text-on-surface hover:bg-white"
+                  }`}
+              >
+                Overnight Rooms
+              </button>
+            </div>
           </div>
-          <StatusOrb label={statusLabel} variant={statusVariant} />
-        </header>
 
-        <div className="grid items-center gap-12 xl:grid-cols-[1.25fr_0.95fr] xl:gap-16 2xl:gap-20">
-          <div className="max-w-2xl space-y-8 xl:max-w-none">
-            <div className="space-y-5">
-              <p className="text-xs font-medium uppercase tracking-[0.25em] text-secondary">
-                Desktop progressive web app
-              </p>
-              <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight text-on-surface sm:text-5xl lg:text-6xl xl:text-[4.25rem]">
-                Install RND on your desktop
-              </h1>
-              <p className="max-w-xl text-base leading-relaxed text-on-surface-muted lg:text-lg lg:leading-8">
-                A precise workspace for Livro service teams. Pin it to your taskbar or dock for
-                instant access — no app store, no browser tabs.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-4 lg:gap-5">
-              {isStandalone ? (
-                <Button variant="success" disabled>
-                  Installed on desktop
-                </Button>
-              ) : canInstall ? (
-                <Button onClick={installApp} className="px-8 py-3.5 text-base">
-                  Install to desktop
-                </Button>
-              ) : (
-                <Button variant="secondary" disabled className="px-8 py-3.5 text-base">
-                  {isIOS ? "Use Share → Add to Home Screen" : "Waiting for install prompt…"}
-                </Button>
-              )}
-              <Link href="/users" className={`${secondaryLinkClass} px-8 py-3.5 text-base`}>
-                Open dashboard
-              </Link>
-            </div>
-
-            {installOutcome === "dismissed" ? (
-              <p className="text-sm text-on-surface-muted">
-                Install dismissed — click the install icon in your address bar to try again.
-              </p>
-            ) : null}
-
-            {!isStandalone && isIOS ? (
-              <div className="futuristic-frame max-w-lg rounded-xl bg-surface-container-low/90 p-6 backdrop-blur-sm lg:hidden">
-                <h2 className="font-display text-lg font-semibold text-primary">On iPhone or iPad</h2>
-                <p className="mt-2 text-sm leading-relaxed text-on-surface-muted">
-                  Tap Share, then <strong className="text-on-surface">Add to Home Screen</strong>.
+          {/* Hero Quick Spotlight Card */}
+          <div className="lg:col-span-4 flex flex-col gap-4">
+            <div className="water-drop-surface rounded-3xl p-5 transition-all duration-300 ease-in-out hover:shadow-xl">
+              <div className="flex items-center justify-between">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-muted">
+                  Quick Active Spot
                 </p>
+                <span className="water-drop-pill rounded-full px-2 py-0.5 text-[9px] font-bold text-on-surface">
+                  {activeResort.openHours}
+                </span>
               </div>
-            ) : null}
+              <p className="mt-2 font-display text-xl font-extrabold text-on-surface">
+                {activeResort.name}
+              </p>
+              <p className="text-xs text-on-surface-variant font-mono mt-0.5 flex items-center gap-1.5">
+                <LuMapPin className="size-3 text-outline" />
+                {activeResort.locationCode}
+              </p>
 
-            <dl className="hidden gap-8 border-t border-primary/10 pt-8 sm:grid sm:grid-cols-3 xl:grid">
-              <div>
-                <dt className="text-xs uppercase tracking-wider text-on-surface-muted">Runtime</dt>
-                <dd className="mt-1 font-display text-lg font-semibold text-primary">Standalone</dd>
+              <div className="mt-4 flex items-center justify-between border-t border-outline-variant/30 pt-3">
+                <span className="text-xs font-semibold text-on-surface-muted">
+                  Cottages Starting
+                </span>
+                <span className="font-display text-base font-extrabold text-primary">
+                  {activeResort.cottages[0].rate}
+                </span>
               </div>
-              <div>
-                <dt className="text-xs uppercase tracking-wider text-on-surface-muted">Stack</dt>
-                <dd className="mt-1 font-display text-lg font-semibold text-on-surface">Next.js 16</dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-wider text-on-surface-muted">Auth</dt>
-                <dd className="mt-1 font-display text-lg font-semibold text-on-surface">Better Auth</dd>
-              </div>
-            </dl>
-          </div>
+            </div>
 
-          <div className="relative xl:pl-4">
-            <div className="futuristic-frame rounded-2xl bg-surface-container-low/60 p-6 backdrop-blur-sm lg:p-8">
-              <DesktopWindowFrame title="RND Template — Standalone">
-                <div className="flex h-full flex-col justify-between">
-                  <div>
-                    <div className="mb-6 flex size-20 items-center justify-center rounded-2xl bg-surface-container-low ring-1 ring-primary/10">
-                      <img src="/icon.svg" alt="" className="size-12" width={48} height={48} />
-                    </div>
-                    <h2 className="font-display text-2xl font-semibold text-primary">RND Template</h2>
-                    <p className="mt-2 text-base text-on-surface-muted">
-                      Atomic Design · Drizzle ORM · Better Auth
-                    </p>
-                  </div>
-                  <div className="mt-10 grid grid-cols-2 gap-6 border-t border-primary/10 pt-6">
-                    <div>
-                      <p className="text-xs uppercase tracking-wider text-on-surface-muted">Window</p>
-                      <p className="mt-1 text-sm font-medium text-on-surface">Frameless PWA</p>
-                    </div>
-                    <div>
-                      <p className="text-xs uppercase tracking-wider text-on-surface-muted">Start URL</p>
-                      <p className="mt-1 font-mono text-sm font-medium text-on-surface">/</p>
-                    </div>
-                  </div>
-                </div>
-              </DesktopWindowFrame>
+            <div className="flex gap-3">
+              <Link
+                href="/browse"
+                className="water-drop-button-primary flex-1 py-3.5 text-center text-xs font-bold transition-all duration-200 ease-in-out hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-1.5"
+              >
+                <LuMap className="size-3.5" />
+                <span>Explore Map &amp; Browse</span>
+              </Link>
+              <a
+                href="#highlights"
+                className="water-drop-button-secondary px-5 py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-all duration-200 ease-in-out hover:scale-[1.02] active:scale-[0.98]"
+              >
+                <span>Highlights ↓</span>
+              </a>
             </div>
           </div>
         </div>
 
-        <section className="mt-20 lg:mt-28">
-          <div className="mb-12 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <h2 className="font-display text-3xl font-semibold text-on-surface lg:text-4xl">
-                How to install
+        {/* 3. The 3 Featured Resort Highlights Grid */}
+        <span id="resorts" className="scroll-mt-28 -translate-y-28 block pointer-events-none" />
+        <section id="highlights" className="mt-24 scroll-mt-24 lg:mt-32">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-outline-variant/30 pb-6">
+            <div className="space-y-2">
+              <div className="water-drop-pill rounded-full inline-flex items-center gap-2 px-3 py-1 text-xs font-bold text-primary">
+                <LuSparkles className="size-3 text-primary" />
+                <span>TUKURAN COASTAL HIGHLIGHTS</span>
+              </div>
+              <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-on-surface">
+                Featured Resorts &amp; Shoreline Spots
               </h2>
-              <p className="mt-2 max-w-2xl text-base text-on-surface-muted">
-                Three steps from browser tab to dedicated desktop app.
+              <p className="text-sm text-on-surface-variant max-w-2xl font-normal">
+                Discover the 3 premier beach destinations in Tukuran, Zamboanga del Sur. Each
+                offers a unique seaside atmosphere for day trips, group gatherings, and cottage getaways.
               </p>
             </div>
-            <div className="hidden h-px flex-1 bg-linear-to-r from-primary/20 to-transparent lg:ml-12 lg:block" aria-hidden />
+
+            <div className="text-right hidden sm:block">
+              <span className="font-mono text-xs font-bold text-on-surface-muted">
+                3 LOCATIONS VERIFIED
+              </span>
+            </div>
           </div>
 
-          <ol className="grid gap-6 lg:grid-cols-3 lg:gap-0">
-            {INSTALL_STEPS.map((step, index) => (
-              <li
-                key={step.title}
-                className="group relative lg:border-l lg:border-primary/15 lg:px-10 lg:first:border-l-0 lg:first:pl-0"
-              >
-                <div className="rounded-xl bg-surface-container-low/80 p-8 backdrop-blur-sm transition-colors hover:bg-surface-container-high/80 lg:rounded-none lg:bg-transparent lg:p-0 lg:backdrop-blur-none lg:hover:bg-transparent">
-                  <span className="font-display text-4xl font-semibold text-primary/25 lg:text-5xl">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-4 font-display text-xl font-semibold text-primary lg:mt-6">
-                    {step.title}
-                  </h3>
-                  <p className="mt-3 max-w-sm text-base leading-relaxed text-on-surface-muted">
-                    {step.body}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ol>
+          <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3 items-stretch">
+            {resorts.map((resort) => {
+              const isSelected = activeResort.id === resort.id;
+              const matchesFilter =
+                guestFilter === "all" ||
+                (guestFilter === "day" &&
+                  resort.cottages.some((c) => c.category === "Day Cottage")) ||
+                (guestFilter === "overnight" && resort.hasOvernightRooms);
+
+              return (
+                <ResortHighlightCard
+                  key={resort.id}
+                  resort={resort}
+                  isSelected={isSelected}
+                  matchesFilter={matchesFilter}
+                  onSelect={(r) => handleSelectResort(r, true)}
+                />
+              );
+            })}
+          </div>
         </section>
 
-        <section className="mt-20 grid gap-8 lg:mt-28 xl:grid-cols-2 xl:gap-10">
-          <div className="futuristic-frame rounded-2xl bg-surface-container-low/90 p-8 backdrop-blur-sm lg:p-10">
-            <PwaPanel embedded controls={pwa} />
+        {/* 4. Interactive Cottage & Room Reservation Pass */}
+        <span id="cottages" className="scroll-mt-28 -translate-y-28 block pointer-events-none" />
+        <section id="cottage-pass" className="mt-24 scroll-mt-24 lg:mt-32">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-outline-variant/30 pb-6">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-on-surface-muted">
+                Direct Booking Engine
+              </p>
+              <h2 className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-on-surface">
+                Cottage Selection &amp; Pass Customizer
+              </h2>
+            </div>
+
+            <div className="water-drop-pill rounded-full flex flex-wrap items-center gap-2 p-1.5">
+              {resorts.map((r) => {
+                const isRSelected = activeResort.id === r.id;
+                return (
+                  <button
+                    key={r.id}
+                    type="button"
+                    onClick={() => handleSelectResort(r)}
+                    className={`cursor-pointer rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 ${isRSelected
+                      ? "water-drop-button-primary"
+                      : "text-on-surface-variant hover:text-on-surface hover:bg-white"
+                      }`}
+                  >
+                    {r.number} · {r.name}
+                  </button>
+                );
+              })}
+            </div>
           </div>
-          <div className="futuristic-frame rounded-2xl bg-surface-container-low/90 p-8 backdrop-blur-sm lg:p-10">
-            <StoragePanel embedded controls={storage} />
-          </div>
+
+          <CottagePass resort={activeResort} />
         </section>
-      </div>
+
+        {/* 5. Side-by-Side Comparison Matrix */}
+        <ResortMatrixTable onSelectResort={handleSelectResort} />
+
+        {/* 6. Coastal Audio Landscape */}
+        <SoundscapeWidget resort={activeResort} />
+
+        {/* 7. Direct Reservation Inquiry Form */}
+        <BookingInquiryForm
+          activeResort={activeResort}
+          onSelectResort={handleSelectResort}
+        />
+      </main>
+
+      {/* 8. Slide-out Booking Bag Drawer */}
+      <BookingCartDrawer />
+
+      {/* 9. Modern Monolithic Dark Footer */}
+      <Footer projectName={projectName} />
     </div>
   );
 }
@@ -204,12 +241,11 @@ export function InstallLanding() {
 export function InstallLandingFallback() {
   return (
     <div className="relative min-h-screen bg-surface">
-      <FuturisticBackdrop />
-      <div className="relative z-10 mx-auto w-full max-w-[1360px] px-8 py-16 lg:px-16">
-        <div className="h-10 w-40 animate-pulse rounded-lg bg-surface-container-low" />
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-8 py-20 lg:px-16">
+        <div className="water-drop-pill h-12 w-48" />
         <div className="mt-16 grid gap-12 xl:grid-cols-2">
-          <div className="h-48 animate-pulse rounded-2xl bg-surface-container-low" />
-          <div className="h-72 animate-pulse rounded-2xl bg-surface-container-low" />
+          <div className="water-drop-surface h-64 rounded-3xl" />
+          <div className="water-drop-surface h-96 rounded-3xl" />
         </div>
       </div>
     </div>

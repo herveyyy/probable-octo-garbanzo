@@ -12,7 +12,7 @@ export function AuthShell({ title, description, children }: AuthShellProps) {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-surface px-6">
-      <main className="w-full max-w-md rounded-2xl bg-surface-container-lowest p-8 shadow-bloom">
+      <main className="w-full max-w-md rounded-3xl bg-surface-container-lowest p-8 shadow-bloom">
         <div className="mb-8 text-center">
           <h1 className="font-display text-3xl font-semibold text-on-surface">{content.title}</h1>
           <p className="mt-2 text-sm text-on-surface-muted">{content.description}</p>

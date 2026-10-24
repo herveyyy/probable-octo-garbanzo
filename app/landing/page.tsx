@@ -5,15 +5,17 @@ import {
   InstallLandingFallback,
 } from "@/components/organisms/InstallLanding/InstallLanding";
 
+const projectName = process.env.PROJECT_NAME || process.env.NEXT_PUBLIC_PROJECT_NAME || "PROJECT ONE";
+
 export const metadata: Metadata = {
-  title: "Install App | RND",
-  description: "Install the RND progressive web app on your device for fast, focused access.",
+  title: `${projectName} | Beach Resorts & Cottage Bookings`,
+  description: `Book seaside cottages, overnight rooms, and open air kubos at Lantau Beach, Donel's Beach Resort, and Sirena Beach Resort in Tukuran, Zamboanga del Sur.`,
 };
 
 export default function LandingPage() {
   return (
     <Suspense fallback={<InstallLandingFallback />}>
-      <InstallLanding />
+      <InstallLanding projectName={projectName} />
     </Suspense>
   );
 }

@@ -1,9 +1,9 @@
 import React from "react";
-import { useButtonStyles } from "./button.hooks";
+import { useButtonStyles, type ButtonVariant } from "./button.hooks";
 
 interface Props {
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "danger" | "success";
+  variant?: ButtonVariant;
   type?: "button" | "submit" | "reset";
   className?: string;
   onClick?: () => void;

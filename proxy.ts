@@ -2,7 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSessionFromHeaders } from "@/lib/domain/services/auth.service";
 
 const authPaths = ["/sign-in", "/sign-up"];
-const publicPaths = ["/sign-in", "/sign-up", "/landing"];
+const publicPaths = [
+  "/",
+  "/sign-in",
+  "/sign-up",
+  "/landing",
+  "/browse",
+  "/resorts",
+];
 
 function matchesPath(pathname: string, paths: string[]) {
   return paths.some((path) => pathname === path || pathname.startsWith(`${path}/`));
@@ -22,6 +29,9 @@ export async function proxy(request: NextRequest) {
   }
 
   if (!session && !matchesPath(pathname, publicPaths)) {
+    if (pathname === "/") {
+      return NextResponse.redirect(new URL("/landing", request.url));
+    }
     const signInUrl = new URL("/sign-in", request.url);
     signInUrl.searchParams.set("callbackURL", pathname);
     return NextResponse.redirect(signInUrl);

@@ -13,7 +13,7 @@ export const UserCard = ({ user, redirectTo = "/users" }: UserCardProps) => {
   const { handleDelete } = useUserCard(redirectTo);
 
   return (
-    <div className="flex items-center justify-between rounded-2xl bg-surface-container-lowest p-4 shadow-bloom">
+    <div className="water-drop-surface flex items-center justify-between rounded-2xl p-5">
       <div>
         <h2 className="text-lg font-semibold">{user.name}</h2>
         <p className="text-sm text-on-surface-muted">{user.email}</p>

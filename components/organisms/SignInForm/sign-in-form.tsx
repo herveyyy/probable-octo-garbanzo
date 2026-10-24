@@ -48,6 +48,18 @@ export async function SignInForm({ searchParams }: SignInFormProps) {
           Create one
         </a>
       </p>
+
+      <div className="mt-5 pt-4 border-t border-outline-variant/30 text-center space-y-2">
+        <p className="text-xs text-on-surface-muted">
+          Testing the resort booking flow?
+        </p>
+        <a
+          href="/browse"
+          className="water-drop-button-secondary block w-full py-2.5 text-xs font-bold text-center"
+        >
+          Continue as Guest (No Login Required)
+        </a>
+      </div>
     </AuthShell>
   );
 }
