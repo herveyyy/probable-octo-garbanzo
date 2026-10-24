@@ -262,7 +262,7 @@ export function IslandNavbar({
           2. MOBILE/TABLET FLOATING DYNAMIC HEADER (< lg)
           Clean, Spacious, Zero Overflow, Perfect Tap Targets
           ───────────────────────────────────────────────────────────── */}
-      <div className="fixed top-3 inset-x-3 sm:top-4 sm:inset-x-6 z-40 lg:hidden transition-all duration-300 ease-in-out">
+      <div className="fixed top-2 sm:top-4 inset-x-2 sm:inset-x-6 z-40 lg:hidden transition-all duration-300 ease-in-out safe-pt safe-px">
         <div
           className={`water-drop-pill rounded-full flex items-center justify-between px-3.5 py-2 shadow-xl w-full max-w-lg mx-auto backdrop-blur-xl transition-all duration-300 ${
             isScrolled ? "bg-white/92 ring-1 ring-primary/20 shadow-2xl" : "bg-white/80"
@@ -319,7 +319,7 @@ export function IslandNavbar({
 
         {/* Mobile Dropdown Menu Drawer */}
         {isMobileMenuOpen && (
-          <div className="mt-2 water-drop-surface-deep rounded-3xl p-5 shadow-2xl transition-all duration-300 ease-in-out w-full max-w-lg mx-auto max-h-[82vh] overflow-y-auto no-scrollbar">
+          <div className="mt-2 water-drop-surface-deep rounded-3xl p-4 sm:p-5 shadow-2xl transition-all duration-300 ease-in-out w-full max-w-lg mx-auto max-h-[calc(100dvh-5.5rem)] overflow-y-auto no-scrollbar safe-pb">
             {/* Demo Guest Account Strip */}
             <div className="water-drop-surface rounded-2xl p-3 mb-3 flex items-center justify-between text-xs">
               <div className="flex items-center gap-2.5">
@@ -599,9 +599,9 @@ export function IslandNavbar({
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4 w-full h-dvh safe-px safe-pt safe-pb"
         >
-          <div className="water-drop-surface-deep rounded-3xl p-6 shadow-2xl max-w-sm w-full space-y-4">
+          <div className="water-drop-surface-deep rounded-3xl p-5 sm:p-6 shadow-2xl max-w-sm w-full space-y-4 max-h-[90dvh] overflow-y-auto no-scrollbar">
             <div className="flex items-center justify-between border-b border-outline-variant/30 pb-3">
               <div className="flex items-center gap-2.5">
                 <div className="size-8 rounded-full bg-primary text-on-primary flex items-center justify-center">

@@ -46,7 +46,7 @@ export default async function ResortDetailPage({ params }: PageProps) {
   return (
     <Suspense
       fallback={
-        <div className="flex min-h-screen items-center justify-center bg-surface">
+        <div className="flex min-h-dvh w-full items-center justify-center bg-surface safe-pt safe-pb safe-px">
           <p className="text-sm font-semibold text-on-surface-muted">
             Loading Resort Profile &amp; Available Units...
           </p>

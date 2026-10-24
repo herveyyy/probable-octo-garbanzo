@@ -16,12 +16,12 @@ export const metadata: Metadata = {
 
 function HomeFallback() {
   return (
-    <div className="flex min-h-screen flex-1 flex-col items-center justify-center bg-surface font-(family-name:--font-inter)">
-      <main className="flex w-full max-w-3xl flex-1 flex-col items-center justify-center px-16 py-32 text-center">
-        <h1 className="font-display mb-6 text-5xl font-semibold tracking-tight text-on-surface">
+    <div className="flex min-h-dvh flex-1 flex-col items-center justify-center bg-transparent font-(family-name:--font-inter) safe-px safe-pt safe-pb">
+      <main className="flex w-full max-w-3xl flex-1 flex-col items-center justify-center px-6 py-16 sm:px-16 sm:py-32 text-center">
+        <h1 className="font-display mb-6 text-3xl sm:text-5xl font-semibold tracking-tight text-on-surface">
           {projectName}
         </h1>
-        <p className="text-lg text-on-surface-muted">Loading...</p>
+        <p className="text-base sm:text-lg text-on-surface-muted">Loading...</p>
       </main>
     </div>
   );
@@ -31,7 +31,7 @@ async function HomeContent() {
   const session = await getSession();
 
   return (
-    <div className="flex min-h-screen flex-1 flex-col items-center justify-center bg-transparent font-(family-name:--font-inter) px-3.5 py-8 sm:px-6 sm:py-16">
+    <div className="flex min-h-dvh flex-1 flex-col items-center justify-center bg-transparent font-(family-name:--font-inter) px-3.5 py-8 sm:px-6 sm:py-16 safe-px safe-pt safe-pb">
       <main className="water-drop-surface-deep w-full max-w-3xl rounded-3xl p-5 sm:p-12 text-center">
         <div className="water-drop-pill rounded-full inline-flex items-center gap-2 px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold text-on-surface mb-5 sm:mb-6">
           <span className="size-2 rounded-full bg-emerald-600" />

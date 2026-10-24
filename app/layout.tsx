@@ -19,6 +19,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  viewportFit: "cover",
   themeColor: "#0066e2",
 };
 
@@ -44,8 +45,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${manrope.variable} ${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-(family-name:--font-inter)">
+    <html lang="en" className={`${manrope.variable} ${inter.variable} min-h-dvh antialiased`}>
+      <body className="min-h-dvh w-full overflow-x-hidden flex flex-col font-(family-name:--font-inter)">
         <CartProvider>{children}</CartProvider>
       </body>
     </html>

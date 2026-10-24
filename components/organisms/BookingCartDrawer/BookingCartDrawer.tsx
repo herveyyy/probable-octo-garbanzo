@@ -84,13 +84,13 @@ export function BookingCartDrawer() {
   if (!isCartOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/40 backdrop-blur-xs transition-opacity duration-300">
+    <div className="fixed inset-0 z-50 flex justify-end bg-black/40 backdrop-blur-xs transition-opacity duration-300 w-full h-dvh">
       {/* Background click to close */}
       <div className="fixed inset-0 -z-10" onClick={handleClose} aria-hidden />
 
-      {/* Slide-out Drawer Panel */}
-      <div className="water-drop-surface-deep relative flex h-full w-full max-w-lg flex-col justify-between overflow-y-auto p-4 sm:p-8 shadow-2xl transition-transform duration-300">
-        <div>
+      {/* Slide-out Drawer Panel with Dynamic Viewport Height */}
+      <div className="water-drop-surface-deep relative flex h-dvh max-h-[100dvh] w-full max-w-lg flex-col justify-between overflow-hidden shadow-2xl transition-transform duration-300 safe-pt">
+        <div className="overflow-y-auto flex-1 p-4 sm:p-8 space-y-4 no-scrollbar">
           {/* Drawer Header */}
           <div className="flex items-center justify-between border-b border-outline-variant/30 pb-3 sm:pb-4">
             <div className="flex items-center gap-2.5">
@@ -699,8 +699,8 @@ export function BookingCartDrawer() {
           )}
         </div>
 
-        {/* Drawer Bottom Actions & Price Summary */}
-        <div className="mt-6 border-t border-outline-variant/30 pt-4 space-y-3">
+        {/* Drawer Bottom Actions & Price Summary (Sticky above safe-area) */}
+        <div className="border-t border-outline-variant/30 p-4 sm:p-6 bg-surface/90 backdrop-blur-md space-y-3 shrink-0 safe-pb">
           {step === "items" && (
             <>
               <div className="flex items-center justify-between text-xs">

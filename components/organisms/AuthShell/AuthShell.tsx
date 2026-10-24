@@ -11,7 +11,7 @@ export function AuthShell({ title, description, children }: AuthShellProps) {
   const content = getAuthShellContent(title, description);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-surface px-6">
+    <div className="flex min-h-dvh w-full items-center justify-center bg-surface px-6 safe-x safe-pt safe-pb">
       <main className="w-full max-w-md rounded-3xl bg-surface-container-lowest p-8 shadow-bloom">
         <div className="mb-8 text-center">
           <h1 className="font-display text-3xl font-semibold text-on-surface">{content.title}</h1>

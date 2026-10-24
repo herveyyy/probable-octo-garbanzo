@@ -15,7 +15,7 @@ export default function BrowsePage() {
   return (
     <Suspense
       fallback={
-        <div className="flex min-h-screen items-center justify-center bg-surface">
+        <div className="flex min-h-dvh w-full items-center justify-center bg-surface safe-pt safe-pb safe-px">
           <p className="text-sm font-semibold text-on-surface-muted">
             Loading Tukuran Coastal Map &amp; Resorts...
           </p>

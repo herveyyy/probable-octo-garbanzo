@@ -52,9 +52,9 @@ export function ResortProfile({
   const { totalCount, openCart, guestName } = useCart();
 
   return (
-    <div className="relative min-h-screen bg-transparent text-on-surface antialiased flex flex-col justify-between">
+    <div className="relative min-h-dvh w-full overflow-x-hidden bg-transparent text-on-surface antialiased flex flex-col justify-between">
       {/* 1. Top Floating Navigation Header */}
-      <header className="sticky top-0 z-40 w-full px-3 pt-3 sm:px-8 sm:pt-4">
+      <header className="sticky top-0 z-40 w-full px-3 pt-3 sm:px-8 sm:pt-4 safe-pt">
         <div className="water-drop-pill rounded-full mx-auto flex w-full max-w-7xl items-center justify-between px-3.5 py-2.5 sm:px-5 sm:py-3 shadow-lg backdrop-blur-xl">
           <div className="flex items-center gap-3">
             <Link

@@ -28,7 +28,7 @@ export function InstallLanding({
   } = useInstallLanding();
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-transparent text-on-surface antialiased flex flex-col justify-between">
+    <div className="relative min-h-dvh w-full overflow-x-hidden bg-transparent text-on-surface antialiased flex flex-col justify-between">
       {/* 1. Responsive Island Navigation Molecule */}
       <IslandNavbar
         projectName={projectName}
@@ -37,7 +37,7 @@ export function InstallLanding({
       />
 
       {/* 2. Hero Section */}
-      <main className="relative z-10 mx-auto w-full max-w-340 px-4 pt-20 pb-12 sm:px-8 sm:pt-28 lg:px-12 lg:pt-36">
+      <main className="relative z-10 mx-auto w-full max-w-340 px-4 pt-20 pb-12 sm:px-8 sm:pt-28 lg:px-12 lg:pt-36 safe-pt safe-px">
         <div className="grid items-end gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-8 space-y-4 sm:space-y-6">
             <h1 className="font-display text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-[-0.03em] text-on-surface leading-[1.12] sm:leading-[1.04]">
@@ -247,7 +247,7 @@ export function InstallLanding({
 
 export function InstallLandingFallback() {
   return (
-    <div className="relative min-h-screen bg-surface">
+    <div className="relative min-h-dvh w-full bg-surface safe-pt safe-pb">
       <div className="relative z-10 mx-auto w-full max-w-7xl px-8 py-20 lg:px-16">
         <div className="water-drop-pill h-12 w-48" />
         <div className="mt-16 grid gap-12 xl:grid-cols-2">
