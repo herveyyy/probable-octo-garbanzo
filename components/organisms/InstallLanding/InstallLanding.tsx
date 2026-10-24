@@ -37,7 +37,7 @@ export function InstallLanding({
       />
 
       {/* 2. Hero Section */}
-      <main className="relative z-10 mx-auto w-full max-w-340 px-4 pt-20 pb-12 sm:px-8 sm:pt-28 lg:px-12 lg:pt-36 safe-pt safe-px">
+      <main className="relative z-10 mx-auto w-full max-w-340 px-4 pt-24 sm:pt-28 lg:pt-36 pb-12 safe-px safe-pb">
         <div className="grid items-end gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-8 space-y-4 sm:space-y-6">
             <h1 className="font-display text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-[-0.03em] text-on-surface leading-[1.12] sm:leading-[1.04]">
@@ -60,32 +60,44 @@ export function InstallLanding({
               <button
                 type="button"
                 onClick={() => setGuestFilter("all")}
-                className={`water-drop-pill rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 ${guestFilter === "all" ? "bg-primary text-on-primary" : "text-on-surface hover:bg-white"
-                  }`}
+                className={`rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out active:scale-95 ${
+                  guestFilter === "all"
+                    ? "bg-primary text-white shadow-sm ring-1 ring-primary"
+                    : "bg-surface-container-high/80 hover:bg-white text-on-surface border border-outline-variant/30 shadow-xs"
+                }`}
               >
                 All 3 Resorts
               </button>
               <button
                 type="button"
                 onClick={() => setGuestFilter("day")}
-                className={`water-drop-pill rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 ${guestFilter === "day" ? "bg-primary text-on-primary" : "text-on-surface hover:bg-white"
-                  }`}
+                className={`rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out active:scale-95 ${
+                  guestFilter === "day"
+                    ? "bg-primary text-white shadow-sm ring-1 ring-primary"
+                    : "bg-surface-container-high/80 hover:bg-white text-on-surface border border-outline-variant/30 shadow-xs"
+                }`}
               >
                 Day-Trip Cottages
               </button>
               <button
                 type="button"
                 onClick={() => setGuestFilter("functionhall")}
-                className={`water-drop-pill rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 ${guestFilter === "functionhall" ? "bg-primary text-on-primary" : "text-on-surface hover:bg-white"
-                  }`}
+                className={`rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out active:scale-95 ${
+                  guestFilter === "functionhall"
+                    ? "bg-primary text-white shadow-sm ring-1 ring-primary"
+                    : "bg-surface-container-high/80 hover:bg-white text-on-surface border border-outline-variant/30 shadow-xs"
+                }`}
               >
                 Function Halls
               </button>
               <button
                 type="button"
                 onClick={() => setGuestFilter("overnight")}
-                className={`water-drop-pill rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 ${guestFilter === "overnight" ? "bg-primary text-on-primary" : "text-on-surface hover:bg-white"
-                  }`}
+                className={`rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out active:scale-95 ${
+                  guestFilter === "overnight"
+                    ? "bg-primary text-white shadow-sm ring-1 ring-primary"
+                    : "bg-surface-container-high/80 hover:bg-white text-on-surface border border-outline-variant/30 shadow-xs"
+                }`}
               >
                 Overnight Rooms
               </button>

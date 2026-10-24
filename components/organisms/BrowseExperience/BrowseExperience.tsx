@@ -91,7 +91,7 @@ export function BrowseExperience({
             </Link>
 
             {/* Demo Guest Indicator */}
-            <div className="water-drop-pill rounded-full hidden md:flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold text-on-surface">
+            <div className="rounded-full hidden md:flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold text-on-surface bg-white/70 border border-outline-variant/30">
               <LuUser className="size-3 text-primary" />
               <span className="max-w-25 truncate">{guestName}</span>
               <span className="rounded-full bg-surface-container-high px-1.5 py-0.2 text-[8px] uppercase tracking-wider text-on-surface-muted font-mono">
@@ -103,8 +103,8 @@ export function BrowseExperience({
             <button
               type="button"
               onClick={openCart}
-              className={`water-drop-pill rounded-full flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs font-bold transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer ${
-                totalCount > 0 ? "bg-primary text-white shadow-md" : "text-on-surface hover:bg-white"
+              className={`rounded-full flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs font-bold transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer ${
+                totalCount > 0 ? "bg-primary text-white shadow-md" : "text-on-surface bg-white/70 hover:bg-white border border-outline-variant/30"
               }`}
             >
               <LuShoppingBag className="size-3.5" />
@@ -188,50 +188,55 @@ export function BrowseExperience({
               <button
                 type="button"
                 onClick={() => setFilterCategory("all")}
-                className={`water-drop-pill rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 ${filterCategory === "all"
-                  ? "bg-primary text-on-primary"
-                  : "text-on-surface hover:bg-white"
-                  }`}
+                className={`rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 active:scale-95 ${
+                  filterCategory === "all"
+                    ? "bg-primary text-white shadow-sm ring-1 ring-primary"
+                    : "bg-surface-container-high/80 hover:bg-white text-on-surface border border-outline-variant/30 shadow-xs"
+                }`}
               >
                 All 3 Resorts
               </button>
               <button
                 type="button"
                 onClick={() => setFilterCategory("day")}
-                className={`water-drop-pill rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 ${filterCategory === "day"
-                  ? "bg-primary text-on-primary"
-                  : "text-on-surface hover:bg-white"
-                  }`}
+                className={`rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 active:scale-95 ${
+                  filterCategory === "day"
+                    ? "bg-primary text-white shadow-sm ring-1 ring-primary"
+                    : "bg-surface-container-high/80 hover:bg-white text-on-surface border border-outline-variant/30 shadow-xs"
+                }`}
               >
                 Day Cottages
               </button>
               <button
                 type="button"
                 onClick={() => setFilterCategory("functionhall")}
-                className={`water-drop-pill rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 ${filterCategory === "functionhall"
-                  ? "bg-primary text-on-primary"
-                  : "text-on-surface hover:bg-white"
-                  }`}
+                className={`rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 active:scale-95 ${
+                  filterCategory === "functionhall"
+                    ? "bg-primary text-white shadow-sm ring-1 ring-primary"
+                    : "bg-surface-container-high/80 hover:bg-white text-on-surface border border-outline-variant/30 shadow-xs"
+                }`}
               >
                 Function Halls
               </button>
               <button
                 type="button"
                 onClick={() => setFilterCategory("overnight")}
-                className={`water-drop-pill rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 ${filterCategory === "overnight"
-                  ? "bg-primary text-on-primary"
-                  : "text-on-surface hover:bg-white"
-                  }`}
+                className={`rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 active:scale-95 ${
+                  filterCategory === "overnight"
+                    ? "bg-primary text-white shadow-sm ring-1 ring-primary"
+                    : "bg-surface-container-high/80 hover:bg-white text-on-surface border border-outline-variant/30 shadow-xs"
+                }`}
               >
                 Overnight Rooms
               </button>
               <button
                 type="button"
                 onClick={() => setFilterCategory("budget")}
-                className={`water-drop-pill rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 ${filterCategory === "budget"
-                  ? "bg-primary text-on-primary"
-                  : "text-on-surface hover:bg-white"
-                  }`}
+                className={`rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 active:scale-95 ${
+                  filterCategory === "budget"
+                    ? "bg-primary text-white shadow-sm ring-1 ring-primary"
+                    : "bg-surface-container-high/80 hover:bg-white text-on-surface border border-outline-variant/30 shadow-xs"
+                }`}
               >
                 Under ₱1,000
               </button>

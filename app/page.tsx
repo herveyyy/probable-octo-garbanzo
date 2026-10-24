@@ -16,8 +16,8 @@ export const metadata: Metadata = {
 
 function HomeFallback() {
   return (
-    <div className="flex min-h-dvh flex-1 flex-col items-center justify-center bg-transparent font-(family-name:--font-inter) safe-px safe-pt safe-pb">
-      <main className="flex w-full max-w-3xl flex-1 flex-col items-center justify-center px-6 py-16 sm:px-16 sm:py-32 text-center">
+    <div className="flex min-h-dvh flex-1 flex-col items-center bg-transparent font-(family-name:--font-inter) safe-px safe-pt safe-pb">
+      <main className="flex w-full max-w-3xl flex-col items-center px-6 py-12 sm:px-16 sm:py-24 text-center my-auto">
         <h1 className="font-display mb-6 text-3xl sm:text-5xl font-semibold tracking-tight text-on-surface">
           {projectName}
         </h1>
@@ -31,8 +31,8 @@ async function HomeContent() {
   const session = await getSession();
 
   return (
-    <div className="flex min-h-dvh flex-1 flex-col items-center justify-center bg-transparent font-(family-name:--font-inter) px-3.5 py-8 sm:px-6 sm:py-16 safe-px safe-pt safe-pb">
-      <main className="water-drop-surface-deep w-full max-w-3xl rounded-3xl p-5 sm:p-12 text-center">
+    <div className="flex min-h-dvh flex-1 flex-col items-center bg-transparent font-(family-name:--font-inter) px-3.5 py-6 sm:px-6 sm:py-16 safe-px safe-pt safe-pb">
+      <main className="water-drop-surface-deep w-full max-w-3xl rounded-3xl p-5 sm:p-12 text-center my-auto">
         <div className="water-drop-pill rounded-full inline-flex items-center gap-2 px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold text-on-surface mb-5 sm:mb-6">
           <span className="size-2 rounded-full bg-emerald-600" />
           <span>Tukuran Beach Resort &amp; Cottage Booking</span>

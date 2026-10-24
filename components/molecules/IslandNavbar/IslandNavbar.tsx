@@ -218,7 +218,7 @@ export function IslandNavbar({
               <button
                 type="button"
                 onClick={openGuestModal}
-                className="water-drop-pill rounded-full flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-on-surface hover:bg-white cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 group"
+                className="rounded-full flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-on-surface bg-white/70 hover:bg-white border border-outline-variant/30 cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 group"
                 title="Click to change Demo Guest Name"
               >
                 <div className="size-5 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
@@ -262,10 +262,22 @@ export function IslandNavbar({
           2. MOBILE/TABLET FLOATING DYNAMIC HEADER (< lg)
           Clean, Spacious, Zero Overflow, Perfect Tap Targets
           ───────────────────────────────────────────────────────────── */}
-      <div className="fixed top-2 sm:top-4 inset-x-2 sm:inset-x-6 z-40 lg:hidden transition-all duration-300 ease-in-out safe-pt safe-px">
+      {/* Dark Blurred Backdrop Overlay to prevent underlying text bleed-through */}
+      {isMobileMenuOpen && (
         <div
-          className={`water-drop-pill rounded-full flex items-center justify-between px-3.5 py-2 shadow-xl w-full max-w-lg mx-auto backdrop-blur-xl transition-all duration-300 ${
-            isScrolled ? "bg-white/92 ring-1 ring-primary/20 shadow-2xl" : "bg-white/80"
+          role="presentation"
+          onClick={closeMobileMenu}
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden transition-opacity duration-300"
+          aria-hidden="true"
+        />
+      )}
+
+      <div className="fixed top-3 sm:top-4 inset-x-3 sm:inset-x-6 z-50 lg:hidden transition-all duration-300 ease-in-out pointer-events-none safe-pt">
+        <div
+          className={`pointer-events-auto rounded-full flex items-center justify-between px-3.5 py-2.5 w-full max-w-lg mx-auto transition-all duration-300 border border-outline-variant/25 ${
+            isScrolled
+              ? "bg-white/98 shadow-xl ring-1 ring-primary/20 backdrop-blur-xl"
+              : "bg-white/95 shadow-md backdrop-blur-xl"
           }`}
         >
           {/* Brand Logo & Name */}
@@ -289,8 +301,10 @@ export function IslandNavbar({
             <button
               type="button"
               onClick={openCart}
-              className={`water-drop-pill rounded-full flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold transition-all duration-200 cursor-pointer active:scale-95 ${
-                totalCount > 0 ? "bg-primary text-white shadow-md" : "hover:bg-white text-on-surface"
+              className={`rounded-full flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold transition-all duration-200 cursor-pointer active:scale-95 ${
+                totalCount > 0
+                  ? "bg-primary text-white shadow-sm"
+                  : "bg-surface-container-high/80 text-on-surface hover:bg-white border border-outline-variant/30"
               }`}
               aria-label="Open Booking Bag"
             >
@@ -307,9 +321,11 @@ export function IslandNavbar({
             <button
               type="button"
               onClick={toggleMobileMenu}
-              aria-label="Toggle Mobile Menu"
-              className={`water-drop-pill rounded-full size-9 flex items-center justify-center cursor-pointer transition-all duration-200 active:scale-95 ${
-                isMobileMenuOpen ? "bg-primary text-white" : "hover:bg-white text-on-surface"
+              aria-label={isMobileMenuOpen ? "Close Mobile Menu" : "Open Mobile Menu"}
+              className={`rounded-full size-9 flex items-center justify-center cursor-pointer transition-all duration-200 active:scale-95 ${
+                isMobileMenuOpen
+                  ? "bg-primary text-white shadow-sm"
+                  : "bg-surface-container-high/80 text-on-surface hover:bg-white border border-outline-variant/30"
               }`}
             >
               {isMobileMenuOpen ? <LuX className="size-4" /> : <LuMenu className="size-4" />}
@@ -317,11 +333,11 @@ export function IslandNavbar({
           </div>
         </div>
 
-        {/* Mobile Dropdown Menu Drawer */}
+        {/* Mobile Dropdown Menu Drawer — Solid Opaque Card (Zero Underlying Text Bleed) */}
         {isMobileMenuOpen && (
-          <div className="mt-2 water-drop-surface-deep rounded-3xl p-4 sm:p-5 shadow-2xl transition-all duration-300 ease-in-out w-full max-w-lg mx-auto max-h-[calc(100dvh-5.5rem)] overflow-y-auto no-scrollbar safe-pb">
+          <div className="mt-2.5 pointer-events-auto bg-white/98 shadow-2xl rounded-3xl p-4 sm:p-5 border border-outline-variant/30 text-on-surface transition-all duration-300 ease-in-out w-full max-w-lg mx-auto max-h-[calc(100dvh-5.5rem)] overflow-y-auto no-scrollbar safe-pb">
             {/* Demo Guest Account Strip */}
-            <div className="water-drop-surface rounded-2xl p-3 mb-3 flex items-center justify-between text-xs">
+            <div className="bg-surface-container-low rounded-2xl p-3 mb-3 border border-outline-variant/20 flex items-center justify-between text-xs">
               <div className="flex items-center gap-2.5">
                 <div className="size-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                   <LuUser className="size-4" />
@@ -339,14 +355,14 @@ export function IslandNavbar({
                   closeMobileMenu();
                   openGuestModal();
                 }}
-                className="water-drop-button-secondary px-2.5 py-1 text-[10px] font-bold"
+                className="bg-white hover:bg-surface-container-high border border-outline-variant/30 rounded-xl px-2.5 py-1 text-[10px] font-bold text-on-surface cursor-pointer transition-colors"
               >
                 Change Name
               </button>
             </div>
 
             {/* Quick Switch Resort Tabs on Mobile */}
-            <div className="water-drop-surface rounded-2xl p-3 mb-3 space-y-2">
+            <div className="bg-surface-container-low rounded-2xl p-3 mb-3 border border-outline-variant/20 space-y-2">
               <span className="text-[10px] font-bold uppercase tracking-wider text-on-surface-muted block">
                 Quick Select Beach Resort:
               </span>
@@ -359,7 +375,9 @@ export function IslandNavbar({
                       type="button"
                       onClick={() => handleSelectAndClose(r)}
                       className={`py-2 px-1 text-center rounded-xl text-[11px] font-bold transition-all cursor-pointer truncate ${
-                        isSel ? "bg-primary text-white shadow-xs" : "bg-white/70 hover:bg-white text-on-surface"
+                        isSel
+                          ? "bg-primary text-white shadow-xs"
+                          : "bg-white border border-outline-variant/30 hover:bg-surface-container-high text-on-surface"
                       }`}
                     >
                       {r.name.replace(" Beach Resort", "").replace(" Resort", "")}
@@ -370,7 +388,7 @@ export function IslandNavbar({
             </div>
 
             {/* Active Resort Info Card */}
-            <div className="water-drop-surface rounded-2xl p-3 mb-4 space-y-1.5 text-xs">
+            <div className="bg-surface-container-low rounded-2xl p-3 mb-3 border border-outline-variant/20 space-y-1.5 text-xs">
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-1.5 font-bold text-on-surface">
                   <span className="size-2 rounded-full bg-emerald-600" />
@@ -388,12 +406,13 @@ export function IslandNavbar({
                   <LuPhone className="size-3" />
                   {activeResort.contactNumber}
                 </a>
-                <span className="water-drop-pill rounded-full px-2 py-0.5 text-[10px] font-bold text-emerald-800">
+                <span className="rounded-full bg-emerald-100 text-emerald-800 px-2 py-0.5 text-[10px] font-bold">
                   Open Today
                 </span>
               </div>
             </div>
 
+            {/* Navigation links with solid hover states */}
             <div className="flex flex-col gap-1 text-xs font-semibold text-on-surface">
               <Link
                 href="/browse"
@@ -408,7 +427,7 @@ export function IslandNavbar({
               <a
                 href="#highlights"
                 onClick={closeMobileMenu}
-                className="flex items-center justify-between p-3 rounded-2xl hover:bg-white transition-all duration-200"
+                className="flex items-center justify-between p-3 rounded-2xl bg-surface-container-low hover:bg-surface-container border border-outline-variant/20 transition-all duration-200"
               >
                 <span className="flex items-center gap-2.5">
                   <LuSparkles className="size-4 text-primary" /> 3 Resort Highlights
@@ -418,7 +437,7 @@ export function IslandNavbar({
               <a
                 href="#cottage-pass"
                 onClick={closeMobileMenu}
-                className="flex items-center justify-between p-3 rounded-2xl hover:bg-white transition-all duration-200"
+                className="flex items-center justify-between p-3 rounded-2xl bg-surface-container-low hover:bg-surface-container border border-outline-variant/20 transition-all duration-200"
               >
                 <span className="flex items-center gap-2.5">
                   <LuTent className="size-4 text-primary" /> Cottages &amp; Reservation Pass
@@ -428,7 +447,7 @@ export function IslandNavbar({
               <a
                 href="#compare"
                 onClick={closeMobileMenu}
-                className="flex items-center justify-between p-3 rounded-2xl hover:bg-white transition-all duration-200"
+                className="flex items-center justify-between p-3 rounded-2xl bg-surface-container-low hover:bg-surface-container border border-outline-variant/20 transition-all duration-200"
               >
                 <span className="flex items-center gap-2.5">
                   <LuWaves className="size-4 text-primary" /> Compare All 3 Resorts
@@ -438,7 +457,7 @@ export function IslandNavbar({
               <a
                 href="#soundscape"
                 onClick={closeMobileMenu}
-                className="flex items-center justify-between p-3 rounded-2xl hover:bg-white transition-all duration-200"
+                className="flex items-center justify-between p-3 rounded-2xl bg-surface-container-low hover:bg-surface-container border border-outline-variant/20 transition-all duration-200"
               >
                 <span className="flex items-center gap-2.5">
                   <LuVolume2 className="size-4 text-primary" /> Seaside Audio Ambience
