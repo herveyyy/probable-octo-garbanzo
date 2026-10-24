@@ -13,14 +13,14 @@ export function ResortMatrixTable({ onSelectResort }: ResortMatrixTableProps) {
   const { handleSelect } = useResortMatrixTable({ onSelectResort });
 
   return (
-    <section id="compare" className="mt-24 scroll-mt-24 lg:mt-32">
-      <div className="water-drop-surface rounded-3xl p-8 sm:p-12">
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-outline-variant/30 pb-6">
+    <section id="compare" className="mt-16 sm:mt-24 lg:mt-32 scroll-mt-24">
+      <div className="water-drop-surface rounded-3xl p-4 sm:p-8 lg:p-12">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 sm:gap-4 border-b border-outline-variant/30 pb-4 sm:pb-6">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-on-surface-muted">
+            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-on-surface-muted">
               Quick Evaluation
             </p>
-            <h3 className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-on-surface">
+            <h3 className="font-display text-xl sm:text-3xl font-extrabold tracking-tight text-on-surface mt-1">
               Compare All 3 Tukuran Resorts
             </h3>
           </div>
@@ -29,7 +29,91 @@ export function ResortMatrixTable({ onSelectResort }: ResortMatrixTableProps) {
           </p>
         </div>
 
-        <div className="mt-8 overflow-x-auto">
+        {/* MOBILE VIEW (< sm): Clean Comparative Cards */}
+        <div className="mt-6 space-y-3 sm:hidden">
+          {TUKURAN_RESORTS.map((resort) => {
+            const hallOption = resort.cottages.find(
+              (c) => c.category === "Function Hall"
+            );
+            const roomOption = resort.cottages.find((c) =>
+              c.category.includes("Room")
+            );
+
+            return (
+              <div
+                key={resort.id}
+                className="water-drop-surface-deep rounded-2xl p-4 space-y-3 border border-outline-variant/20"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="relative size-12 rounded-xl overflow-hidden shrink-0">
+                    <Image
+                      src={resort.image}
+                      alt={resort.name}
+                      fill
+                      sizes="48px"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between gap-1">
+                      <p className="font-bold text-on-surface text-sm truncate">{resort.name}</p>
+                      <span className="water-drop-pill rounded-full px-2 py-0.5 text-[9px] font-bold text-primary shrink-0">
+                        0{resort.number}
+                      </span>
+                    </div>
+                    <p className="text-[10px] text-on-surface-muted font-mono">{resort.locationCode}</p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2 text-xs pt-1">
+                  <div className="bg-white/60 rounded-xl p-2.5">
+                    <span className="text-[10px] text-on-surface-muted uppercase font-bold block">Day Cottages</span>
+                    <span className="font-mono font-bold text-primary block mt-0.5">
+                      From {resort.cottages[0].rate.split("/")[0]}
+                    </span>
+                  </div>
+                  <div className="bg-white/60 rounded-xl p-2.5">
+                    <span className="text-[10px] text-on-surface-muted uppercase font-bold block">Function Hall</span>
+                    <span className="font-bold block mt-0.5 text-[11px]">
+                      {hallOption ? (
+                        <span className="text-amber-900 font-bold">{hallOption.rate.split("/")[0]}</span>
+                      ) : (
+                        <span className="text-on-surface-muted font-mono">None</span>
+                      )}
+                    </span>
+                  </div>
+                  <div className="bg-white/60 rounded-xl p-2.5">
+                    <span className="text-[10px] text-on-surface-muted uppercase font-bold block">Overnight Rooms</span>
+                    <span className="font-bold block mt-0.5 text-[11px]">
+                      {roomOption ? (
+                        <span className="text-emerald-800 font-bold">{roomOption.rate.split("/")[0]}</span>
+                      ) : (
+                        <span className="text-on-surface-muted">Day Only</span>
+                      )}
+                    </span>
+                  </div>
+                  <div className="bg-white/60 rounded-xl p-2.5">
+                    <span className="text-[10px] text-on-surface-muted uppercase font-bold block">Payment</span>
+                    <span className="font-semibold text-sky-800 block mt-0.5 text-[10px]">
+                      GCash · Maya
+                    </span>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => handleSelect(resort)}
+                  className="water-drop-button-primary w-full py-2.5 text-center text-xs font-bold transition-all"
+                >
+                  Select {resort.name}
+                </button>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* DESKTOP VIEW (sm+): Full 7-Column Matrix Table */}
+        <div className="mt-8 overflow-x-auto hidden sm:block">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
               <tr className="border-b border-outline-variant/30 text-on-surface-muted font-mono uppercase text-[10px]">

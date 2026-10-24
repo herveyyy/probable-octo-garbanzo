@@ -58,23 +58,23 @@ export function BrowseExperience({
   const { totalCount, openCart, guestName } = useCart();
 
   return (
-    <div className="relative min-h-screen bg-surface text-on-surface antialiased flex flex-col justify-between">
+    <div className="relative min-h-screen bg-transparent text-on-surface antialiased flex flex-col justify-between">
       {/* 1. Browse Top Floating Navigation Header */}
-      <header className="sticky top-0 z-40 w-full px-4 pt-4 sm:px-8">
-        <div className="water-drop-pill rounded-full mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-3 shadow-lg">
-          <div className="flex items-center gap-3">
+      <header className="sticky top-0 z-40 w-full px-3 pt-3 sm:px-8 sm:pt-4">
+        <div className="water-drop-pill rounded-full mx-auto flex w-full max-w-7xl items-center justify-between px-3.5 py-2.5 sm:px-5 sm:py-3 shadow-lg backdrop-blur-xl">
+          <div className="flex items-center gap-3 min-w-0 pr-2">
             <Link
               href="/landing"
               className="flex items-center gap-2 transition-transform duration-200 hover:scale-105"
             >
-              <span className="flex size-8 items-center justify-center rounded-full bg-primary text-on-primary shadow-xs">
+              <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary text-on-primary shadow-xs">
                 <LuTreePalm className="size-4" />
               </span>
-              <div>
-                <span className="font-display text-sm font-extrabold tracking-tight text-on-surface block leading-tight">
+              <div className="truncate">
+                <span className="font-display text-xs sm:text-sm font-extrabold tracking-tight text-on-surface block leading-tight truncate">
                   {projectName}
                 </span>
-                <span className="text-[10px] uppercase tracking-wider text-on-surface-muted block leading-none">
+                <span className="text-[9px] sm:text-[10px] uppercase tracking-wider text-on-surface-muted block leading-none truncate">
                   Tukuran Coastal Explorer
                 </span>
               </div>
@@ -82,7 +82,7 @@ export function BrowseExperience({
           </div>
 
           {/* Quick links & Cart Trigger */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 shrink-0">
             <Link
               href="/landing#highlights"
               className="hidden sm:inline-flex items-center gap-1 text-xs font-semibold text-on-surface-variant hover:text-on-surface transition-colors"
@@ -91,7 +91,7 @@ export function BrowseExperience({
             </Link>
 
             {/* Demo Guest Indicator */}
-            <div className="water-drop-pill rounded-full hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold text-on-surface">
+            <div className="water-drop-pill rounded-full hidden md:flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold text-on-surface">
               <LuUser className="size-3 text-primary" />
               <span className="max-w-25 truncate">{guestName}</span>
               <span className="rounded-full bg-surface-container-high px-1.5 py-0.2 text-[8px] uppercase tracking-wider text-on-surface-muted font-mono">
@@ -103,7 +103,9 @@ export function BrowseExperience({
             <button
               type="button"
               onClick={openCart}
-              className="water-drop-button-primary flex items-center gap-2 px-4 py-2 text-xs font-bold transition-all duration-200 hover:scale-105 active:scale-95"
+              className={`water-drop-pill rounded-full flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs font-bold transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer ${
+                totalCount > 0 ? "bg-primary text-white shadow-md" : "text-on-surface hover:bg-white"
+              }`}
             >
               <LuShoppingBag className="size-3.5" />
               <span>Bag</span>
@@ -118,75 +120,75 @@ export function BrowseExperience({
       </header>
 
       {/* 2. Main Content Area */}
-      <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-8 lg:py-12">
+      <main className="mx-auto w-full max-w-7xl px-3 py-5 sm:px-8 sm:py-8 lg:py-12">
         {/* Page Title & Context Header */}
-        <div className="mb-8 space-y-4">
-          <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="mb-6 space-y-3 sm:mb-8 sm:space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <div className="water-drop-pill rounded-full inline-flex items-center gap-2 px-3.5 py-1 text-xs font-semibold text-on-surface">
+              <div className="water-drop-pill rounded-full inline-flex items-center gap-2 px-3 py-1 text-[11px] sm:text-xs font-semibold text-on-surface">
                 <span className="size-2 rounded-full bg-emerald-600" />
-                <span>INTERACTIVE RESORT &amp; COTTAGE MAP · TUKURAN, PHILIPPINES</span>
+                <span>COASTAL RESORT &amp; COTTAGE MAP · TUKURAN</span>
               </div>
-              <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-on-surface mt-2">
+              <h1 className="font-display text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-on-surface mt-1.5 sm:mt-2">
                 Browse Shoreline Resorts
               </h1>
             </div>
 
             {/* Mobile View Toggle */}
-            <div className="water-drop-pill rounded-full flex items-center p-1 lg:hidden">
-              <button
-                type="button"
-                onClick={() => setMobileView("split")}
-                className={`rounded-full px-3 py-1 text-xs font-bold transition-all ${mobileView === "split"
-                  ? "bg-primary text-on-primary"
-                  : "text-on-surface-variant hover:text-on-surface"
-                  }`}
-              >
-                Split
-              </button>
+            <div className="water-drop-pill rounded-full flex items-center p-1 lg:hidden self-start sm:self-auto">
               <button
                 type="button"
                 onClick={() => setMobileView("map")}
-                className={`rounded-full px-3 py-1 text-xs font-bold transition-all ${mobileView === "map"
+                className={`rounded-full px-3 py-1 text-xs font-bold transition-all cursor-pointer ${mobileView === "map"
                   ? "bg-primary text-on-primary"
                   : "text-on-surface-variant hover:text-on-surface"
                   }`}
               >
-                Map
+                Map View
               </button>
               <button
                 type="button"
                 onClick={() => setMobileView("list")}
-                className={`rounded-full px-3 py-1 text-xs font-bold transition-all ${mobileView === "list"
+                className={`rounded-full px-3 py-1 text-xs font-bold transition-all cursor-pointer ${mobileView === "list"
                   ? "bg-primary text-on-primary"
                   : "text-on-surface-variant hover:text-on-surface"
                   }`}
               >
-                List
+                List View
+              </button>
+              <button
+                type="button"
+                onClick={() => setMobileView("split")}
+                className={`rounded-full px-3 py-1 text-xs font-bold transition-all cursor-pointer ${mobileView === "split"
+                  ? "bg-primary text-on-primary"
+                  : "text-on-surface-variant hover:text-on-surface"
+                  }`}
+              >
+                Both
               </button>
             </div>
           </div>
 
           {/* Search Input & Quick Filter Pills */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 pt-1">
             {/* Live Search Input */}
             <div className="relative flex-1">
-              <LuSearch className="absolute left-4 top-1/2 -translate-y-1/2 size-4 text-outline" />
+              <LuSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-outline" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search resort name, barangay, or location code..."
-                className="water-drop-pill rounded-full w-full pl-11 pr-4 py-3 text-xs text-on-surface outline-hidden placeholder:text-on-surface-muted transition-all"
+                className="water-drop-pill rounded-full w-full pl-10 pr-4 py-2.5 sm:py-3 text-xs text-on-surface outline-hidden placeholder:text-on-surface-muted transition-all"
               />
             </div>
 
-            {/* Filter Pills */}
-            <div className="flex flex-wrap items-center gap-2">
+            {/* Filter Pills - Swipeable on phone */}
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 -mx-3 px-3 sm:mx-0 sm:px-0 sm:flex-wrap">
               <button
                 type="button"
                 onClick={() => setFilterCategory("all")}
-                className={`water-drop-pill rounded-full px-3.5 py-2 text-xs font-bold cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 ${filterCategory === "all"
+                className={`water-drop-pill rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 ${filterCategory === "all"
                   ? "bg-primary text-on-primary"
                   : "text-on-surface hover:bg-white"
                   }`}
@@ -196,7 +198,7 @@ export function BrowseExperience({
               <button
                 type="button"
                 onClick={() => setFilterCategory("day")}
-                className={`water-drop-pill rounded-full px-3.5 py-2 text-xs font-bold cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 ${filterCategory === "day"
+                className={`water-drop-pill rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 ${filterCategory === "day"
                   ? "bg-primary text-on-primary"
                   : "text-on-surface hover:bg-white"
                   }`}
@@ -206,7 +208,7 @@ export function BrowseExperience({
               <button
                 type="button"
                 onClick={() => setFilterCategory("functionhall")}
-                className={`water-drop-pill rounded-full px-3.5 py-2 text-xs font-bold cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 ${filterCategory === "functionhall"
+                className={`water-drop-pill rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 ${filterCategory === "functionhall"
                   ? "bg-primary text-on-primary"
                   : "text-on-surface hover:bg-white"
                   }`}
@@ -216,7 +218,7 @@ export function BrowseExperience({
               <button
                 type="button"
                 onClick={() => setFilterCategory("overnight")}
-                className={`water-drop-pill rounded-full px-3.5 py-2 text-xs font-bold cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 ${filterCategory === "overnight"
+                className={`water-drop-pill rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 ${filterCategory === "overnight"
                   ? "bg-primary text-on-primary"
                   : "text-on-surface hover:bg-white"
                   }`}
@@ -226,7 +228,7 @@ export function BrowseExperience({
               <button
                 type="button"
                 onClick={() => setFilterCategory("budget")}
-                className={`water-drop-pill rounded-full px-3.5 py-2 text-xs font-bold cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 ${filterCategory === "budget"
+                className={`water-drop-pill rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95 ${filterCategory === "budget"
                   ? "bg-primary text-on-primary"
                   : "text-on-surface hover:bg-white"
                   }`}
@@ -236,6 +238,7 @@ export function BrowseExperience({
             </div>
           </div>
         </div>
+
 
         {/* 3. Interactive Split Map & Resort List Layout */}
         <div className="grid gap-8 lg:grid-cols-12 items-start">

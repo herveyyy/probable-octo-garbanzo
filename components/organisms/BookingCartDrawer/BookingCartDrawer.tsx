@@ -89,16 +89,16 @@ export function BookingCartDrawer() {
       <div className="fixed inset-0 -z-10" onClick={handleClose} aria-hidden />
 
       {/* Slide-out Drawer Panel */}
-      <div className="water-drop-surface-deep relative flex h-full w-full max-w-lg flex-col justify-between overflow-y-auto p-6 sm:p-8 shadow-2xl transition-transform duration-300">
+      <div className="water-drop-surface-deep relative flex h-full w-full max-w-lg flex-col justify-between overflow-y-auto p-4 sm:p-8 shadow-2xl transition-transform duration-300">
         <div>
           {/* Drawer Header */}
-          <div className="flex items-center justify-between border-b border-outline-variant/30 pb-4">
+          <div className="flex items-center justify-between border-b border-outline-variant/30 pb-3 sm:pb-4">
             <div className="flex items-center gap-2.5">
-              <span className="flex size-9 items-center justify-center rounded-full bg-primary text-on-primary shadow-xs">
+              <span className="flex size-8 sm:size-9 items-center justify-center rounded-full bg-primary text-on-primary shadow-xs">
                 <LuShoppingBag className="size-4" />
               </span>
               <div>
-                <h2 className="font-display text-lg font-extrabold text-on-surface">
+                <h2 className="font-display text-base sm:text-lg font-extrabold text-on-surface">
                   {step === "confirmed"
                     ? "Pass & Payment Receipt"
                     : step === "payment"
@@ -219,21 +219,23 @@ export function BookingCartDrawer() {
                           </div>
 
                           {/* Quantity controls */}
-                          <div className="water-drop-pill rounded-full flex items-center gap-2 px-2.5 py-1">
+                          <div className="water-drop-pill rounded-full flex items-center gap-1.5 px-2 py-1">
                             <button
                               type="button"
                               onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                              className="size-5 font-bold text-on-surface hover:text-primary flex items-center justify-center cursor-pointer"
+                              className="size-7 rounded-full font-bold text-on-surface hover:text-primary hover:bg-white/80 flex items-center justify-center cursor-pointer transition-colors active:scale-90"
+                              aria-label="Decrease quantity"
                             >
                               -
                             </button>
-                            <span className="font-mono text-xs font-bold text-on-surface min-w-4 text-center">
+                            <span className="font-mono text-xs font-bold text-on-surface min-w-5 text-center">
                               {item.quantity}
                             </span>
                             <button
                               type="button"
                               onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                              className="size-5 font-bold text-on-surface hover:text-primary flex items-center justify-center cursor-pointer"
+                              className="size-7 rounded-full font-bold text-on-surface hover:text-primary hover:bg-white/80 flex items-center justify-center cursor-pointer transition-colors active:scale-90"
+                              aria-label="Increase quantity"
                             >
                               +
                             </button>

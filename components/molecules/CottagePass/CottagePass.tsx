@@ -110,11 +110,11 @@ export function CottagePass({ resort }: CottagePassProps) {
       </div>
 
       {/* Right: Tactile Reservation Pass */}
-      <div className="water-drop-surface-deep lg:col-span-5 flex flex-col justify-between rounded-3xl p-6 sm:p-8">
+      <div className="water-drop-surface-deep lg:col-span-5 flex flex-col justify-between rounded-3xl p-4 sm:p-8 overflow-hidden">
         <div>
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-dashed border-outline-variant/50 pb-5">
-            <div className="flex items-center gap-2.5">
+          <div className="flex items-center justify-between border-b border-dashed border-outline-variant/50 pb-4 sm:pb-5">
+            <div className="flex items-center gap-2 sm:gap-2.5">
               <span className="flex size-7 items-center justify-center rounded-full bg-primary text-on-primary">
                 <LuTent className="size-3.5" />
               </span>
@@ -133,7 +133,7 @@ export function CottagePass({ resort }: CottagePassProps) {
           </div>
 
           {/* Cottage Option Selector */}
-          <div className="my-5 space-y-2">
+          <div className="my-4 sm:my-5 space-y-2">
             <p className="text-[11px] font-bold uppercase tracking-wider text-on-surface-muted">
               Select Cottage, Function Hall, or Room
             </p>
@@ -145,16 +145,16 @@ export function CottagePass({ resort }: CottagePassProps) {
                     key={cot.name}
                     type="button"
                     onClick={() => handleSelectCottage(idx)}
-                    className={`text-left p-3.5 rounded-2xl transition-all duration-200 ease-in-out cursor-pointer border ${isCotSelected
+                    className={`text-left p-3 sm:p-3.5 rounded-2xl transition-all duration-200 ease-in-out cursor-pointer border ${isCotSelected
                         ? "bg-white border-primary shadow-sm scale-[1.01]"
                         : "bg-surface-container-low/60 border-transparent hover:bg-white/80 hover:scale-[1.005]"
                       }`}
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-on-surface">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs font-bold text-on-surface truncate">
                         {cot.name}
                       </span>
-                      <span className="font-mono text-xs font-black text-primary">
+                      <span className="font-mono text-xs font-black text-primary shrink-0">
                         {cot.rate}
                       </span>
                     </div>
@@ -171,11 +171,11 @@ export function CottagePass({ resort }: CottagePassProps) {
           </div>
 
           {/* Perforated Pass Ticket Details */}
-          <div className="ticket-notch-left ticket-notch-right relative my-4 rounded-2xl bg-surface-container-low/80 p-5 border border-white/80">
-            <div className="space-y-3">
+          <div className="ticket-notch-left ticket-notch-right relative my-4 rounded-2xl bg-surface-container-low/80 p-4 sm:p-5 border border-white/80">
+            <div className="space-y-2.5 sm:space-y-3">
               <div className="flex items-center justify-between text-xs">
                 <span className="text-on-surface-muted">Cottage Choice</span>
-                <span className="font-bold text-on-surface text-right truncate max-w-44">
+                <span className="font-bold text-on-surface text-right truncate max-w-36 sm:max-w-44">
                   {activeCottage.name}
                 </span>
               </div>

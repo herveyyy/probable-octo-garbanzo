@@ -28,7 +28,7 @@ export function InstallLanding({
   } = useInstallLanding();
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-surface text-on-surface antialiased flex flex-col justify-between">
+    <div className="relative min-h-screen overflow-x-hidden bg-transparent text-on-surface antialiased flex flex-col justify-between">
       {/* 1. Responsive Island Navigation Molecule */}
       <IslandNavbar
         projectName={projectName}
@@ -37,32 +37,30 @@ export function InstallLanding({
       />
 
       {/* 2. Hero Section */}
-      <main className="relative z-10 mx-auto w-full max-w-340 px-6 pt-24 pb-16 lg:px-12 lg:pt-36">
-        <div className="grid items-end gap-8 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-8 space-y-6">
-
-
-            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-[-0.04em] text-on-surface leading-[1.04]">
-              Beach resorts, open-air cottages, <br />
+      <main className="relative z-10 mx-auto w-full max-w-340 px-4 pt-20 pb-12 sm:px-8 sm:pt-28 lg:px-12 lg:pt-36">
+        <div className="grid items-end gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-8 space-y-4 sm:space-y-6">
+            <h1 className="font-display text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-[-0.03em] text-on-surface leading-[1.12] sm:leading-[1.04]">
+              Beach resorts, open-air cottages, <br className="hidden sm:inline" />
               function halls &amp; overnight rooms.
             </h1>
 
-            <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-on-surface-variant font-normal">
+            <p className="max-w-2xl text-sm sm:text-base lg:text-lg leading-relaxed text-on-surface-variant font-normal">
               Book local beachfront kubos, shaded day-trip cottages, grand banquet function halls,
               and overnight coastal rooms in Tukuran, Zamboanga del Sur. Explore the calm waters at <strong>Lantau Beach</strong>,
               group family shorelines at <strong>Donel&apos;s Beach Resort</strong>, and waterfront retreats
               at <strong>Sirena Beach Resort</strong> in Dalahikan. Secure instant passes with online payment via GCash, Maya, or Card.
             </p>
 
-            {/* Quick Filter Capsules */}
-            <div className="flex flex-wrap items-center gap-2 pt-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-on-surface-muted mr-1">
+            {/* Quick Filter Capsules - Swipeable on mobile */}
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap pt-1">
+              <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-on-surface-muted mr-1 shrink-0">
                 Filter:
               </span>
               <button
                 type="button"
                 onClick={() => setGuestFilter("all")}
-                className={`water-drop-pill rounded-full px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 ${guestFilter === "all" ? "bg-primary text-on-primary" : "text-on-surface hover:bg-white"
+                className={`water-drop-pill rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 ${guestFilter === "all" ? "bg-primary text-on-primary" : "text-on-surface hover:bg-white"
                   }`}
               >
                 All 3 Resorts
@@ -70,23 +68,23 @@ export function InstallLanding({
               <button
                 type="button"
                 onClick={() => setGuestFilter("day")}
-                className={`water-drop-pill rounded-full px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 ${guestFilter === "day" ? "bg-primary text-on-primary" : "text-on-surface hover:bg-white"
+                className={`water-drop-pill rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 ${guestFilter === "day" ? "bg-primary text-on-primary" : "text-on-surface hover:bg-white"
                   }`}
               >
-                Day-Trip Open-Air Cottages
+                Day-Trip Cottages
               </button>
               <button
                 type="button"
                 onClick={() => setGuestFilter("functionhall")}
-                className={`water-drop-pill rounded-full px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 ${guestFilter === "functionhall" ? "bg-primary text-on-primary" : "text-on-surface hover:bg-white"
+                className={`water-drop-pill rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 ${guestFilter === "functionhall" ? "bg-primary text-on-primary" : "text-on-surface hover:bg-white"
                   }`}
               >
-                Event Function Halls
+                Function Halls
               </button>
               <button
                 type="button"
                 onClick={() => setGuestFilter("overnight")}
-                className={`water-drop-pill rounded-full px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 ${guestFilter === "overnight" ? "bg-primary text-on-primary" : "text-on-surface hover:bg-white"
+                className={`water-drop-pill rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold cursor-pointer transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 ${guestFilter === "overnight" ? "bg-primary text-on-primary" : "text-on-surface hover:bg-white"
                   }`}
               >
                 Overnight Rooms
@@ -95,8 +93,8 @@ export function InstallLanding({
           </div>
 
           {/* Hero Quick Spotlight Card */}
-          <div className="lg:col-span-4 flex flex-col gap-4">
-            <div className="water-drop-surface rounded-3xl p-5 transition-all duration-300 ease-in-out hover:shadow-xl">
+          <div className="lg:col-span-4 flex flex-col gap-3 sm:gap-4">
+            <div className="water-drop-surface rounded-3xl p-4 sm:p-5 transition-all duration-300 ease-in-out hover:shadow-xl">
               <div className="flex items-center justify-between">
                 <p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-muted">
                   Quick Active Spot
@@ -105,7 +103,7 @@ export function InstallLanding({
                   {activeResort.openHours}
                 </span>
               </div>
-              <p className="mt-2 font-display text-xl font-extrabold text-on-surface">
+              <p className="mt-1.5 font-display text-lg sm:text-xl font-extrabold text-on-surface">
                 {activeResort.name}
               </p>
               <p className="text-xs text-on-surface-variant font-mono mt-0.5 flex items-center gap-1.5">
@@ -113,7 +111,7 @@ export function InstallLanding({
                 {activeResort.locationCode}
               </p>
 
-              <div className="mt-4 flex items-center justify-between border-t border-outline-variant/30 pt-3">
+              <div className="mt-3 flex items-center justify-between border-t border-outline-variant/30 pt-2.5">
                 <span className="text-xs font-semibold text-on-surface-muted">
                   Cottages Starting
                 </span>
@@ -123,17 +121,17 @@ export function InstallLanding({
               </div>
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
               <Link
                 href="/browse"
-                className="water-drop-button-primary flex-1 py-3.5 text-center text-xs font-bold transition-all duration-200 ease-in-out hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-1.5"
+                className="water-drop-button-primary flex-1 py-3 sm:py-3.5 text-center text-xs font-bold transition-all duration-200 ease-in-out hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-1.5"
               >
                 <LuMap className="size-3.5" />
                 <span>Explore Map &amp; Browse</span>
               </Link>
               <a
                 href="#highlights"
-                className="water-drop-button-secondary px-5 py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-all duration-200 ease-in-out hover:scale-[1.02] active:scale-[0.98]"
+                className="water-drop-button-secondary py-3 sm:py-3.5 px-4 sm:px-5 text-xs font-bold flex items-center justify-center gap-1.5 transition-all duration-200 ease-in-out hover:scale-[1.02] active:scale-[0.98]"
               >
                 <span>Highlights ↓</span>
               </a>

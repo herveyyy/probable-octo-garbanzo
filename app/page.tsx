@@ -31,29 +31,29 @@ async function HomeContent() {
   const session = await getSession();
 
   return (
-    <div className="flex min-h-screen flex-1 flex-col items-center justify-center bg-surface font-(family-name:--font-inter) px-6 py-16">
-      <main className="water-drop-surface-deep w-full max-w-3xl rounded-3xl p-8 sm:p-12 text-center">
-        <div className="water-drop-pill rounded-full inline-flex items-center gap-2 px-4 py-1.5 text-xs font-semibold text-on-surface mb-6">
+    <div className="flex min-h-screen flex-1 flex-col items-center justify-center bg-transparent font-(family-name:--font-inter) px-3.5 py-8 sm:px-6 sm:py-16">
+      <main className="water-drop-surface-deep w-full max-w-3xl rounded-3xl p-5 sm:p-12 text-center">
+        <div className="water-drop-pill rounded-full inline-flex items-center gap-2 px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold text-on-surface mb-5 sm:mb-6">
           <span className="size-2 rounded-full bg-emerald-600" />
           <span>Tukuran Beach Resort &amp; Cottage Booking</span>
         </div>
 
-        <h1 className="font-display mb-3 text-4xl sm:text-5xl font-extrabold tracking-tight text-on-surface">
+        <h1 className="font-display mb-3 text-3xl sm:text-5xl font-extrabold tracking-tight text-on-surface">
           {projectName}
         </h1>
 
-        <p className="mb-6 text-sm sm:text-base leading-relaxed text-on-surface-variant max-w-xl mx-auto font-normal">
+        <p className="mb-6 text-xs sm:text-base leading-relaxed text-on-surface-variant max-w-xl mx-auto font-normal">
           Reserve beachfront cottages, open-air kubos, and coastal overnight rooms across
           Tukuran, Zamboanga del Sur. Direct hotlines and verified spots for Lantau Beach,
           Donel&apos;s Beach Resort, and Sirena Beach Resort.
         </p>
 
         {session ? (
-          <div className="water-drop-pill rounded-full inline-block px-5 py-2 mb-6 text-xs font-medium text-on-surface">
+          <div className="water-drop-pill rounded-full inline-block px-4 py-1.5 sm:px-5 sm:py-2 mb-6 text-xs font-medium text-on-surface">
             Active Member: <span className="font-bold text-primary">{session.user.name}</span>
           </div>
         ) : (
-          <div className="water-drop-pill rounded-full inline-flex items-center gap-2 px-5 py-2 mb-6 text-xs font-medium text-on-surface">
+          <div className="water-drop-pill rounded-full inline-flex items-center gap-2 px-4 py-1.5 sm:px-5 sm:py-2 mb-6 text-xs font-medium text-on-surface">
             <span className="size-2 rounded-full bg-emerald-600" />
             <span>Demo Guest Account Active · <strong className="text-primary font-bold">No Login Required</strong></span>
           </div>
@@ -63,7 +63,7 @@ async function HomeContent() {
         <div className="grid gap-3 sm:grid-cols-3 mb-8 text-left">
           <Link
             href="/landing#highlights"
-            className="water-drop-surface p-4 rounded-2xl block hover:bg-white transition-all duration-200 ease-in-out hover:scale-[1.02] active:scale-[0.98] group"
+            className="water-drop-surface p-4 rounded-2xl block transition-all duration-200 ease-in-out hover:scale-[1.02] active:scale-[0.98] group"
           >
             <p className="text-[10px] font-bold text-on-surface-muted uppercase">01 · Open-Air</p>
             <p className="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">
@@ -79,7 +79,7 @@ async function HomeContent() {
 
           <Link
             href="/landing#highlights"
-            className="water-drop-surface p-4 rounded-2xl block hover:bg-white transition-all duration-200 ease-in-out hover:scale-[1.02] active:scale-[0.98] group"
+            className="water-drop-surface p-4 rounded-2xl block transition-all duration-200 ease-in-out hover:scale-[1.02] active:scale-[0.98] group"
           >
             <p className="text-[10px] font-bold text-on-surface-muted uppercase">02 · Shoreline</p>
             <p className="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">
@@ -95,7 +95,7 @@ async function HomeContent() {
 
           <Link
             href="/landing#highlights"
-            className="water-drop-surface p-4 rounded-2xl block hover:bg-white transition-all duration-200 ease-in-out hover:scale-[1.02] active:scale-[0.98] group"
+            className="water-drop-surface p-4 rounded-2xl block transition-all duration-200 ease-in-out hover:scale-[1.02] active:scale-[0.98] group"
           >
             <p className="text-[10px] font-bold text-on-surface-muted uppercase">03 · Waterfront</p>
             <p className="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">

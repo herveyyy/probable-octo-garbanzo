@@ -74,29 +74,29 @@ export function Footer({ projectName = "PROJECT ONE" }: FooterProps) {
   ];
 
   return (
-    <footer className="w-full mt-24">
+    <footer className="w-full mt-16 sm:mt-24">
       {/* Dark Monolithic Card with Rounded Top Corners */}
-      <div className="mx-auto w-full max-w-340 rounded-t-3xl bg-[#161618] px-6 pt-16 pb-12 sm:px-12 sm:pt-20 sm:pb-16 text-white shadow-2xl border-t border-white/10">
+      <div className="mx-auto w-full max-w-340 rounded-t-3xl bg-[#161618] px-4 pt-12 pb-10 sm:px-12 sm:pt-20 sm:pb-16 text-white shadow-2xl border-t border-white/10">
         {/* Top Header with Icon Squircle & Brand Title */}
         <div className="flex flex-col items-center text-center">
           {/* White Squircle Logo Icon */}
-          <div className="flex size-14 items-center justify-center rounded-2xl bg-white shadow-lg text-[#161618] transition-all duration-300 ease-in-out hover:scale-105">
-            <LuTreePalm className="size-7 text-[#161618]" />
+          <div className="flex size-12 sm:size-14 items-center justify-center rounded-2xl bg-white shadow-lg text-[#161618] transition-all duration-300 ease-in-out hover:scale-105">
+            <LuTreePalm className="size-6 sm:size-7 text-[#161618]" />
           </div>
 
           {/* Large Bold Brand Name */}
-          <h2 className="mt-5 font-display text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white uppercase">
+          <h2 className="mt-4 sm:mt-5 font-display text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white uppercase">
             {projectName}
           </h2>
 
           {/* Subtitle */}
-          <p className="mt-2 text-sm sm:text-base text-[#8c8c91] font-normal tracking-wide">
+          <p className="mt-1.5 sm:mt-2 text-xs sm:text-base text-[#8c8c91] font-normal tracking-wide">
             Tukuran Beach Resorts &amp; Cottage Bookings · Zamboanga del Sur
           </p>
         </div>
 
         {/* 7 Navigation Columns Grid */}
-        <div className="mt-16 sm:mt-20 grid grid-cols-2 gap-8 sm:grid-cols-4 lg:grid-cols-7 lg:gap-6 border-t border-white/10 pt-12">
+        <div className="mt-12 sm:mt-20 grid grid-cols-2 gap-6 sm:grid-cols-4 lg:grid-cols-7 lg:gap-6 border-t border-white/10 pt-10 sm:pt-12">
           {footerNav.map((col) => (
             <div key={col.title} className="space-y-4">
               <h3 className="font-display text-xs font-extrabold uppercase tracking-wider text-white">

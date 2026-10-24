@@ -52,21 +52,22 @@ export function ResortProfile({
   const { totalCount, openCart, guestName } = useCart();
 
   return (
-    <div className="relative min-h-screen bg-surface text-on-surface antialiased flex flex-col justify-between">
+    <div className="relative min-h-screen bg-transparent text-on-surface antialiased flex flex-col justify-between">
       {/* 1. Top Floating Navigation Header */}
-      <header className="sticky top-0 z-40 w-full px-4 pt-4 sm:px-8">
-        <div className="water-drop-pill rounded-full mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-3 shadow-lg">
+      <header className="sticky top-0 z-40 w-full px-3 pt-3 sm:px-8 sm:pt-4">
+        <div className="water-drop-pill rounded-full mx-auto flex w-full max-w-7xl items-center justify-between px-3.5 py-2.5 sm:px-5 sm:py-3 shadow-lg backdrop-blur-xl">
           <div className="flex items-center gap-3">
             <Link
               href="/browse"
               className="water-drop-pill rounded-full flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-on-surface hover:bg-white transition-all hover:scale-105 active:scale-95"
             >
               <LuArrowLeft className="size-3.5 text-primary" />
-              <span>Back to Map &amp; Browse</span>
+              <span className="hidden sm:inline">Back to Map &amp; Browse</span>
+              <span className="sm:hidden">Browse Map</span>
             </Link>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <span className="hidden md:inline-flex text-xs font-mono font-semibold text-on-surface-muted">
               {resort.name} · {resort.barangay}
             </span>
@@ -84,7 +85,9 @@ export function ResortProfile({
             <button
               type="button"
               onClick={openCart}
-              className="water-drop-button-primary flex items-center gap-2 px-4 py-2 text-xs font-bold transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
+              className={`water-drop-pill rounded-full flex items-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs font-bold transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer ${
+                totalCount > 0 ? "bg-primary text-white shadow-md" : "text-on-surface hover:bg-white"
+              }`}
             >
               <LuShoppingBag className="size-3.5" />
               <span>Bag</span>
@@ -99,10 +102,10 @@ export function ResortProfile({
       </header>
 
       {/* 2. Main Profile Content */}
-      <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-8 lg:py-12 space-y-12">
+      <main className="mx-auto w-full max-w-7xl px-3 py-5 sm:px-8 sm:py-8 lg:py-12 space-y-8 sm:space-y-12">
         {/* Resort Showcase Hero Card */}
-        <section className="water-drop-surface rounded-3xl p-6 sm:p-8 lg:p-10">
-          <div className="grid gap-8 lg:grid-cols-12 items-center">
+        <section className="water-drop-surface rounded-3xl p-4 sm:p-8 lg:p-10">
+          <div className="grid gap-6 sm:gap-8 lg:grid-cols-12 items-center">
             {/* Left: Interactive Photographic Gallery */}
             <div className="lg:col-span-7 space-y-3">
               <div className="relative aspect-16/10 w-full overflow-hidden rounded-2xl shadow-md">
@@ -116,41 +119,41 @@ export function ResortProfile({
                 />
                 <div className="absolute inset-0 bg-black/15" />
 
-                <div className="absolute top-4 left-4 flex items-center gap-2 flex-wrap">
-                  <span className="water-drop-pill rounded-full px-3 py-1 font-mono text-[10px] font-bold text-on-surface shadow-xs">
+                <div className="absolute top-3 left-3 sm:top-4 sm:left-4 flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                  <span className="water-drop-pill rounded-full px-2.5 py-0.5 sm:px-3 sm:py-1 font-mono text-[9px] sm:text-[10px] font-bold text-on-surface shadow-xs">
                     {resort.number} · {resort.badge}
                   </span>
                   {resort.hasFunctionHall && (
-                    <span className="water-drop-pill rounded-full px-2.5 py-1 text-[10px] font-bold text-amber-900 bg-amber-50">
+                    <span className="water-drop-pill rounded-full px-2 py-0.5 sm:px-2.5 sm:py-1 text-[9px] sm:text-[10px] font-bold text-amber-900 bg-amber-50">
                       Function Hall
                     </span>
                   )}
                   {resort.hasOvernightRooms && (
-                    <span className="water-drop-pill rounded-full px-2.5 py-1 text-[10px] font-bold text-emerald-800 bg-emerald-50">
+                    <span className="water-drop-pill rounded-full px-2 py-0.5 sm:px-2.5 sm:py-1 text-[9px] sm:text-[10px] font-bold text-emerald-800 bg-emerald-50">
                       Overnight Rooms
                     </span>
                   )}
                 </div>
 
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <p className="font-mono text-xs uppercase tracking-widest text-white/90">
+                <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 text-white">
+                  <p className="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-white/90">
                     {resort.barangay}, Tukuran, Zamboanga del Sur
                   </p>
-                  <h1 className="font-display text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
+                  <h1 className="font-display text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white">
                     {resort.name}
                   </h1>
                 </div>
               </div>
 
-              {/* Gallery Thumbnails */}
+              {/* Gallery Thumbnails - Swipeable on mobile */}
               {images.length > 1 && (
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-1">
                   {images.map((img, idx) => (
                     <button
                       key={idx}
                       type="button"
                       onClick={() => setSelectedGalleryIdx(idx)}
-                      className={`relative aspect-16/10 w-24 overflow-hidden rounded-xl border-2 transition-all cursor-pointer ${selectedGalleryIdx === idx
+                      className={`relative aspect-16/10 w-20 sm:w-24 shrink-0 overflow-hidden rounded-xl border-2 transition-all cursor-pointer ${selectedGalleryIdx === idx
                           ? "border-primary scale-105 shadow-md"
                           : "border-transparent opacity-70 hover:opacity-100"
                         }`}
@@ -158,6 +161,7 @@ export function ResortProfile({
                       <Image
                         src={img}
                         alt={`Photo ${idx + 1}`}
+
                         fill
                         sizes="96px"
                         className="size-full object-cover"
@@ -259,12 +263,12 @@ export function ResortProfile({
               </p>
             </div>
 
-            {/* Category Filter Tabs */}
-            <div className="water-drop-pill rounded-full flex items-center p-1.5 self-start md:self-auto flex-wrap gap-1">
+            {/* Category Filter Tabs - Horizontal swipe on mobile */}
+            <div className="water-drop-pill rounded-full flex items-center p-1.5 self-start md:self-auto overflow-x-auto no-scrollbar max-w-full gap-1">
               <button
                 type="button"
                 onClick={() => setSelectedCategory("all")}
-                className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer ${selectedCategory === "all"
+                className={`rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer ${selectedCategory === "all"
                     ? "bg-primary text-on-primary"
                     : "text-on-surface-variant hover:text-on-surface"
                   }`}
@@ -274,7 +278,7 @@ export function ResortProfile({
               <button
                 type="button"
                 onClick={() => setSelectedCategory("day")}
-                className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer ${selectedCategory === "day"
+                className={`rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer ${selectedCategory === "day"
                     ? "bg-primary text-on-primary"
                     : "text-on-surface-variant hover:text-on-surface"
                   }`}
@@ -285,7 +289,7 @@ export function ResortProfile({
                 <button
                   type="button"
                   onClick={() => setSelectedCategory("hall")}
-                  className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer ${selectedCategory === "hall"
+                  className={`rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer ${selectedCategory === "hall"
                       ? "bg-primary text-on-primary"
                       : "text-on-surface-variant hover:text-on-surface"
                     }`}
@@ -297,7 +301,7 @@ export function ResortProfile({
                 <button
                   type="button"
                   onClick={() => setSelectedCategory("room")}
-                  className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer ${selectedCategory === "room"
+                  className={`rounded-full shrink-0 px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer ${selectedCategory === "room"
                       ? "bg-primary text-on-primary"
                       : "text-on-surface-variant hover:text-on-surface"
                     }`}
@@ -309,11 +313,12 @@ export function ResortProfile({
           </div>
 
           {/* Quick Date and Group Size Bar */}
-          <div className="water-drop-surface rounded-2xl p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 text-xs">
-            <div className="flex flex-wrap items-center gap-4">
-              <div className="flex items-center gap-2">
-                <LuCalendar className="size-4 text-primary" />
-                <span className="font-bold text-on-surface">Target Date:</span>
+          <div className="water-drop-surface rounded-2xl p-3 sm:p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 text-xs">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <div className="flex items-center justify-between sm:justify-start gap-2">
+                <span className="font-bold text-on-surface flex items-center gap-1.5">
+                  <LuCalendar className="size-4 text-primary" /> Target Date:
+                </span>
                 <input
                   type="date"
                   value={bookingDate}
@@ -322,9 +327,10 @@ export function ResortProfile({
                 />
               </div>
 
-              <div className="flex items-center gap-2">
-                <LuUsers className="size-4 text-primary" />
-                <span className="font-bold text-on-surface">Group Size:</span>
+              <div className="flex items-center justify-between sm:justify-start gap-2">
+                <span className="font-bold text-on-surface flex items-center gap-1.5">
+                  <LuUsers className="size-4 text-primary" /> Group:
+                </span>
                 <select
                   value={selectedGuests}
                   onChange={(e) => setSelectedGuests(e.target.value)}
@@ -339,7 +345,7 @@ export function ResortProfile({
               </div>
             </div>
 
-            <div className="text-[11px] font-mono text-on-surface-muted self-end sm:self-auto">
+            <div className="text-[11px] font-mono text-on-surface-muted hidden sm:block">
               Live Demo Booking · Instant Digital Ticket Pass
             </div>
           </div>

@@ -27,16 +27,14 @@ export function BookingInquiryForm({
   } = useBookingInquiryForm({ activeResort, onSelectResort });
 
   return (
-    <section id="booking" className="mt-24 scroll-mt-24 lg:mt-32">
-      <div className="water-drop-surface-deep rounded-3xl p-8 sm:p-12 lg:p-16">
-        <div className="mx-auto max-w-2xl text-center space-y-4">
-
-
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-on-surface">
+    <section id="booking" className="mt-16 sm:mt-24 lg:mt-32 scroll-mt-24">
+      <div className="water-drop-surface-deep rounded-3xl p-4 sm:p-10 lg:p-16">
+        <div className="mx-auto max-w-2xl text-center space-y-3 sm:space-y-4">
+          <h2 className="font-display text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-on-surface">
             Reserve cottages, function halls &amp; rooms.
           </h2>
 
-          <p className="text-sm sm:text-base leading-relaxed text-on-surface-variant font-normal">
+          <p className="text-xs sm:text-base leading-relaxed text-on-surface-variant font-normal">
             Planning a wedding reception, corporate seminar, family gathering, weekend picnic, or overnight beach stay? Inquire directly
             or reserve online with instant confirmation.
           </p>

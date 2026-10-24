@@ -12,15 +12,15 @@ export function SoundscapeWidget({ resort }: SoundscapeWidgetProps) {
   const { isPlaying, togglePlaying } = useSoundscapeWidget();
 
   return (
-    <section id="soundscape" className="mt-24 scroll-mt-24 lg:mt-32">
-      <div className="water-drop-surface rounded-3xl p-8 lg:p-12">
-        <div className="grid gap-8 lg:grid-cols-12 items-center">
-          <div className="lg:col-span-7 space-y-4">
-            <div className="water-drop-pill rounded-full inline-flex items-center gap-2 px-3.5 py-1 text-xs font-semibold text-on-surface">
+    <section id="soundscape" className="mt-16 sm:mt-24 lg:mt-32 scroll-mt-24">
+      <div className="water-drop-surface rounded-3xl p-4 sm:p-8 lg:p-12">
+        <div className="grid gap-6 sm:gap-8 lg:grid-cols-12 items-center">
+          <div className="lg:col-span-7 space-y-3 sm:space-y-4">
+            <div className="water-drop-pill rounded-full inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold text-on-surface">
               <LuWaves className="size-3.5 text-primary" />
               <span>Tukuran Coast Audio Landscape</span>
             </div>
-            <h3 className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-on-surface">
+            <h3 className="font-display text-xl sm:text-3xl font-extrabold tracking-tight text-on-surface">
               Listen to the seaside breeze.
             </h3>
             <p className="text-sm leading-relaxed text-on-surface-variant max-w-xl">

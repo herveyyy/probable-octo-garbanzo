@@ -259,63 +259,58 @@ export function IslandNavbar({
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          2. UNSCROLLED MOBILE/TABLET HEADER (< lg, zero collision!)
+          2. MOBILE/TABLET FLOATING DYNAMIC HEADER (< lg)
+          Clean, Spacious, Zero Overflow, Perfect Tap Targets
           ───────────────────────────────────────────────────────────── */}
-      <div
-        className={`fixed top-4 inset-x-4 z-40 lg:hidden transition-all duration-300 ease-in-out ${isScrolled
-            ? "opacity-0 -translate-y-4 pointer-events-none"
-            : "opacity-100 translate-y-0"
+      <div className="fixed top-3 inset-x-3 sm:top-4 sm:inset-x-6 z-40 lg:hidden transition-all duration-300 ease-in-out">
+        <div
+          className={`water-drop-pill rounded-full flex items-center justify-between px-3.5 py-2 shadow-xl w-full max-w-lg mx-auto backdrop-blur-xl transition-all duration-300 ${
+            isScrolled ? "bg-white/92 ring-1 ring-primary/20 shadow-2xl" : "bg-white/80"
           }`}
-      >
-        <div className="water-drop-pill rounded-full flex items-center justify-between px-4 py-2.5 shadow-lg w-full max-w-lg mx-auto">
-          <Link href="/landing" className="flex items-center gap-2">
-            <span className="flex size-7 items-center justify-center rounded-full bg-primary text-on-primary">
-              <LuTreePalm className="size-3.5" />
+        >
+          {/* Brand Logo & Name */}
+          <Link href="/landing" className="flex items-center gap-2 min-w-0 pr-2">
+            <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary text-on-primary shadow-sm">
+              <LuTreePalm className="size-4" />
             </span>
-            <div>
-              <span className="font-display text-xs font-bold tracking-tight text-on-surface block leading-tight">
+            <div className="truncate">
+              <span className="font-display text-xs font-black tracking-tight text-on-surface block leading-tight truncate">
                 {projectName}
               </span>
-              <span className="text-[9px] uppercase tracking-wider text-on-surface-muted block leading-none">
-                Tukuran, Philippines
+              <span className="text-[10px] font-semibold text-primary block leading-none truncate">
+                {activeResort.name}
               </span>
             </div>
           </Link>
 
-          <div className="flex items-center gap-1.5">
-            <button
-              type="button"
-              onClick={openGuestModal}
-              className="water-drop-pill rounded-full flex items-center gap-1 px-2 py-1.5 text-[10px] font-bold cursor-pointer hover:bg-white text-on-surface"
-              title="Demo Guest Account"
-            >
-              <LuUser className="size-3 text-primary" />
-              <span className="max-w-13.75 truncate">{guestName}</span>
-            </button>
+          {/* Clean Action Controls */}
+          <div className="flex items-center gap-1.5 shrink-0">
+            {/* Bag Button with Animated Count Badge */}
             <button
               type="button"
               onClick={openCart}
-              className="water-drop-button-secondary flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-bold cursor-pointer"
+              className={`water-drop-pill rounded-full flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold transition-all duration-200 cursor-pointer active:scale-95 ${
+                totalCount > 0 ? "bg-primary text-white shadow-md" : "hover:bg-white text-on-surface"
+              }`}
               aria-label="Open Booking Bag"
             >
               <LuShoppingBag className="size-3.5" />
+              <span>Bag</span>
               {totalCount > 0 && (
-                <span className="flex size-3.5 items-center justify-center rounded-full bg-primary text-on-primary text-[9px] font-black">
+                <span className="flex size-4 items-center justify-center rounded-full bg-white text-primary text-[10px] font-black">
                   {totalCount}
                 </span>
               )}
             </button>
-            <a
-              href="#booking"
-              className="water-drop-button-primary px-3 py-1.5 text-[11px] font-bold transition-all duration-200 ease-in-out hover:scale-105 active:scale-95"
-            >
-              Reserve
-            </a>
+
+            {/* Menu Trigger */}
             <button
               type="button"
               onClick={toggleMobileMenu}
               aria-label="Toggle Mobile Menu"
-              className="water-drop-pill rounded-full size-8 flex items-center justify-center cursor-pointer transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 text-on-surface"
+              className={`water-drop-pill rounded-full size-9 flex items-center justify-center cursor-pointer transition-all duration-200 active:scale-95 ${
+                isMobileMenuOpen ? "bg-primary text-white" : "hover:bg-white text-on-surface"
+              }`}
             >
               {isMobileMenuOpen ? <LuX className="size-4" /> : <LuMenu className="size-4" />}
             </button>
@@ -324,16 +319,16 @@ export function IslandNavbar({
 
         {/* Mobile Dropdown Menu Drawer */}
         {isMobileMenuOpen && (
-          <div className="mt-2 water-drop-surface-deep rounded-3xl p-5 shadow-2xl transition-all duration-300 ease-in-out w-full max-w-lg mx-auto">
+          <div className="mt-2 water-drop-surface-deep rounded-3xl p-5 shadow-2xl transition-all duration-300 ease-in-out w-full max-w-lg mx-auto max-h-[82vh] overflow-y-auto no-scrollbar">
             {/* Demo Guest Account Strip */}
-            <div className="water-drop-surface-deep rounded-2xl p-3 mb-3 flex items-center justify-between text-xs">
-              <div className="flex items-center gap-2">
-                <div className="size-7 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                  <LuUser className="size-3.5" />
+            <div className="water-drop-surface rounded-2xl p-3 mb-3 flex items-center justify-between text-xs">
+              <div className="flex items-center gap-2.5">
+                <div className="size-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                  <LuUser className="size-4" />
                 </div>
                 <div>
                   <span className="text-[9px] font-bold uppercase tracking-wider text-on-surface-muted block">
-                    Demo Guest Account
+                    Guest Account (Demo)
                   </span>
                   <span className="font-bold text-on-surface text-xs">{guestName}</span>
                 </div>
@@ -349,20 +344,42 @@ export function IslandNavbar({
                 Change Name
               </button>
             </div>
-            <div className="water-drop-surface-deep rounded-2xl p-3 mb-4 space-y-1.5 text-xs">
+
+            {/* Quick Switch Resort Tabs on Mobile */}
+            <div className="water-drop-surface rounded-2xl p-3 mb-3 space-y-2">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-on-surface-muted block">
+                Quick Select Beach Resort:
+              </span>
+              <div className="grid grid-cols-3 gap-1.5">
+                {TUKURAN_RESORTS.map((r) => {
+                  const isSel = activeResort.id === r.id;
+                  return (
+                    <button
+                      key={r.id}
+                      type="button"
+                      onClick={() => handleSelectAndClose(r)}
+                      className={`py-2 px-1 text-center rounded-xl text-[11px] font-bold transition-all cursor-pointer truncate ${
+                        isSel ? "bg-primary text-white shadow-xs" : "bg-white/70 hover:bg-white text-on-surface"
+                      }`}
+                    >
+                      {r.name.replace(" Beach Resort", "").replace(" Resort", "")}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Active Resort Info Card */}
+            <div className="water-drop-surface rounded-2xl p-3 mb-4 space-y-1.5 text-xs">
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-1.5 font-bold text-on-surface">
                   <span className="size-2 rounded-full bg-emerald-600" />
-                  TUKURAN COAST
+                  {activeResort.name}
                 </span>
                 <span className="font-mono text-[10px] text-on-surface-muted">
                   {activeResort.openHours}
                 </span>
               </div>
-              <p className="text-[11px] text-on-surface-variant font-medium">
-                Active: <strong>{activeResort.name}</strong> ·{" "}
-                {activeResort.locationCode.split(",")[0]}
-              </p>
               <div className="pt-1 flex items-center justify-between">
                 <a
                   href={`tel:${activeResort.contactNumber}`}
@@ -381,19 +398,19 @@ export function IslandNavbar({
               <Link
                 href="/browse"
                 onClick={closeMobileMenu}
-                className="flex items-center justify-between p-2.5 rounded-xl bg-white/70 hover:bg-white transition-all duration-200 ease-in-out font-bold text-primary"
+                className="flex items-center justify-between p-3 rounded-2xl bg-primary/10 hover:bg-primary/15 transition-all duration-200 font-bold text-primary"
               >
-                <span className="flex items-center gap-2">
+                <span className="flex items-center gap-2.5">
                   <LuMap className="size-4 text-primary" /> Interactive Map &amp; Browse
                 </span>
-                <LuArrowRight className="size-3.5 opacity-50" />
+                <LuArrowRight className="size-3.5" />
               </Link>
               <a
                 href="#highlights"
                 onClick={closeMobileMenu}
-                className="flex items-center justify-between p-2.5 rounded-xl hover:bg-white transition-all duration-200 ease-in-out"
+                className="flex items-center justify-between p-3 rounded-2xl hover:bg-white transition-all duration-200"
               >
-                <span className="flex items-center gap-2">
+                <span className="flex items-center gap-2.5">
                   <LuSparkles className="size-4 text-primary" /> 3 Resort Highlights
                 </span>
                 <LuArrowRight className="size-3.5 opacity-50" />
@@ -401,9 +418,9 @@ export function IslandNavbar({
               <a
                 href="#cottage-pass"
                 onClick={closeMobileMenu}
-                className="flex items-center justify-between p-2.5 rounded-xl hover:bg-white transition-all duration-200 ease-in-out"
+                className="flex items-center justify-between p-3 rounded-2xl hover:bg-white transition-all duration-200"
               >
-                <span className="flex items-center gap-2">
+                <span className="flex items-center gap-2.5">
                   <LuTent className="size-4 text-primary" /> Cottages &amp; Reservation Pass
                 </span>
                 <LuArrowRight className="size-3.5 opacity-50" />
@@ -411,9 +428,9 @@ export function IslandNavbar({
               <a
                 href="#compare"
                 onClick={closeMobileMenu}
-                className="flex items-center justify-between p-2.5 rounded-xl hover:bg-white transition-all duration-200 ease-in-out"
+                className="flex items-center justify-between p-3 rounded-2xl hover:bg-white transition-all duration-200"
               >
-                <span className="flex items-center gap-2">
+                <span className="flex items-center gap-2.5">
                   <LuWaves className="size-4 text-primary" /> Compare All 3 Resorts
                 </span>
                 <LuArrowRight className="size-3.5 opacity-50" />
@@ -421,9 +438,9 @@ export function IslandNavbar({
               <a
                 href="#soundscape"
                 onClick={closeMobileMenu}
-                className="flex items-center justify-between p-2.5 rounded-xl hover:bg-white transition-all duration-200 ease-in-out"
+                className="flex items-center justify-between p-3 rounded-2xl hover:bg-white transition-all duration-200"
               >
-                <span className="flex items-center gap-2">
+                <span className="flex items-center gap-2.5">
                   <LuVolume2 className="size-4 text-primary" /> Seaside Audio Ambience
                 </span>
                 <LuArrowRight className="size-3.5 opacity-50" />
@@ -434,13 +451,14 @@ export function IslandNavbar({
               <a
                 href="#booking"
                 onClick={closeMobileMenu}
-                className="water-drop-button-primary flex-1 py-3 text-center text-xs font-bold transition-all duration-200 ease-in-out"
+                className="water-drop-button-primary flex-1 py-3 text-center text-xs font-bold transition-all duration-200"
               >
                 Reserve Cottage Now
               </a>
               <a
                 href={`tel:${activeResort.contactNumber}`}
-                className="water-drop-button-secondary px-4 py-3 text-xs font-bold flex items-center justify-center transition-all duration-200 ease-in-out"
+                className="water-drop-button-secondary px-4 py-3 text-xs font-bold flex items-center justify-center transition-all duration-200"
+                aria-label="Direct Call"
               >
                 <LuPhoneCall className="size-4" />
               </a>
@@ -450,10 +468,10 @@ export function IslandNavbar({
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          3. SCROLLED CIRCLE ISLAND (Both Desktop and Mobile)
+          3. SCROLLED CIRCLE ISLAND (Desktop Only, lg+)
           ───────────────────────────────────────────────────────────── */}
       {isScrolled && (
-        <div className="fixed top-4 right-4 sm:top-5 sm:right-6 z-50 transition-all duration-300 ease-in-out">
+        <div className="fixed top-5 right-6 z-50 hidden lg:block transition-all duration-300 ease-in-out">
           {!isCircleIslandOpen ? (
             <button
               type="button"
